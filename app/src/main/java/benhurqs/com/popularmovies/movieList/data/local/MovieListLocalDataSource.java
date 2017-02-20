@@ -1,8 +1,19 @@
 package benhurqs.com.popularmovies.movieList.data.local;
 
+import android.support.annotation.NonNull;
+
+import com.google.gson.Gson;
+
+import benhurqs.com.popularmovies.data.api.PopularMovieAPIServices;
+import benhurqs.com.popularmovies.data.local.Cache;
+import benhurqs.com.popularmovies.data.local.CacheDAO;
+import benhurqs.com.popularmovies.data.local.CacheType;
 import benhurqs.com.popularmovies.movieList.data.MovieListDataSource;
+import benhurqs.com.popularmovies.movieList.data.api.MovieListAPIDataSource;
 import benhurqs.com.popularmovies.movieList.domain.entities.MovieList;
+import io.realm.Realm;
 import rx.Observable;
+import rx.Subscriber;
 
 /**
  * Created by Benhur on 19/02/17.
@@ -10,13 +21,60 @@ import rx.Observable;
 
 public class MovieListLocalDataSource implements MovieListDataSource {
 
+    private static MovieListLocalDataSource instance;
+    public CacheDAO dao;
+
+    public static MovieListLocalDataSource getInstance() {
+        if (instance == null) {
+            instance = new MovieListLocalDataSource();
+        }
+
+        return instance;
+    }
+
+    public MovieListLocalDataSource() {
+        dao = CacheDAO.getInstance();
+    }
+
     @Override
     public Observable<MovieList> getTopMovieList() {
-        return null;
+        return getMovieListObservable(CacheType.MOVIE_LIST_TOP);
     }
 
     @Override
     public Observable<MovieList> getPopularMovieList() {
-        return null;
+        return getMovieListObservable(CacheType.MOVIE_LIST_POPULAR);
     }
+
+    @NonNull
+    private Observable<MovieList> getMovieListObservable(@CacheType.Type final int type) {
+        Observable.OnSubscribe<MovieList> subscribe = new Observable.OnSubscribe<MovieList>() {
+            @Override
+            public void call(Subscriber<? super MovieList> subscriber) {
+                Cache cache = dao.findCacheByType(type);
+                if (cache != null) {
+                    subscriber.onError(new Throwable("Not found"));
+                    return;
+                }
+
+                Gson gson = new Gson();
+                MovieList obj = gson.fromJson(cache.json, MovieList.class);
+                if (obj == null) {
+                    subscriber.onError(new Throwable("Erro ao fazer o parse"));
+                    return;
+                }
+
+                subscriber.onNext(obj);
+                subscriber.onCompleted();
+            }
+        };
+
+        return Observable.create(subscribe);
+    }
+
+    public Observable<MovieList> save(@CacheType.Type final int type, MovieList movieList){
+        return dao.saveCache(type, movieList);
+    }
+
+
 }

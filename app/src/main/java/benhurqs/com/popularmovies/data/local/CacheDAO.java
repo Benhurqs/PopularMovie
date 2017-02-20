@@ -1,6 +1,11 @@
 package benhurqs.com.popularmovies.data.local;
 
+import com.google.gson.Gson;
+
+import benhurqs.com.popularmovies.movieList.domain.entities.MovieList;
 import io.realm.Realm;
+import rx.Observable;
+import rx.Subscriber;
 
 /**
  * Created by benhur.souza on 20/02/2017.
@@ -11,7 +16,7 @@ public class CacheDAO {
     private Realm realm;
     private static CacheDAO instance;
 
-    private static CacheDAO getInstance(){
+    public static CacheDAO getInstance(){
         if(instance == null){
             instance = new CacheDAO();
         }
@@ -26,51 +31,70 @@ public class CacheDAO {
     /**
      * Save cache object
      * @param type
-     * @param json
+     * @param movieList
      */
-    public void saveCache(final int type, final String json){
-        realm.executeTransactionAsync(new Realm.Transaction() {
+    public Observable<MovieList> saveCache(final int type, final MovieList movieList){
+        Observable.OnSubscribe<MovieList> subscribe = new Observable.OnSubscribe<MovieList>() {
             @Override
-            public void execute(Realm bgRealm) {
-                //check if already exist
-                Cache cache = findCacheByType(bgRealm, type);
-                if(cache == null){
-                    //Save new
-                    cache = bgRealm.createObject(Cache.class);
-                }
+            public void call(final Subscriber<? super MovieList> subscriber) {
+                realm.executeTransactionAsync(new Realm.Transaction() {
+                    @Override
+                    public void execute(Realm bgRealm) {
+                        subscriber.onStart();
+                        //check if already exist
+                        Cache cache = findCacheByType(bgRealm, type);
+                        if(cache == null){
+                            //Save new
+                            cache = bgRealm.createObject(Cache.class);
+                        }
 
-                //Update json
-                cache.json = json;
-                cache.type = type;
-//                cache.date = cache
-            }
-        }, new Realm.Transaction.OnSuccess() {
-            @Override
-            public void onSuccess() {
-            }
-        }, new Realm.Transaction.OnError() {
-            @Override
-            public void onError(Throwable error) {
+                        //Convert to json
+                        Gson gson = new Gson();
+                        String json = gson.toJson(movieList);
+
+                        //Update json
+                        cache.json = json;
+                        cache.type = type;
+
+                        subscriber.onNext(movieList);
+                    }
+                }, new Realm.Transaction.OnSuccess() {
+                    @Override
+                    public void onSuccess() {
+                        subscriber.onCompleted();
+                    }
+                }, new Realm.Transaction.OnError() {
+                    @Override
+                    public void onError(Throwable error) {
+                        subscriber.onError(error);
+                    }
+                });
 
             }
-        });
+        };
 
+        return Observable.create(subscribe);
     }
+
+
+    public Cache findCacheByType(@CacheType.Type int type){
+        return findCacheByType(realm,type);
+    }
+
 
     /**
      * Find Cache object by Type
+     * @param realm
      * @param type
      * @return
      */
-    public Cache findCacheByType(int type){
-        return findCacheByType(realm, type);
-    }
-
-    private Cache findCacheByType(Realm realm, int type){
+    private Cache findCacheByType(Realm realm,@CacheType.Type int type){
         return realm.where(Cache.class)
                 .equalTo("type", type)
                 .findFirst();
     }
+
+
 
 
 }

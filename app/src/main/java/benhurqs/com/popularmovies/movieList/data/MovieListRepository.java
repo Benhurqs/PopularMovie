@@ -2,6 +2,7 @@ package benhurqs.com.popularmovies.movieList.data;
 
 import android.support.annotation.NonNull;
 
+import benhurqs.com.popularmovies.data.local.CacheType;
 import benhurqs.com.popularmovies.movieList.domain.entities.MovieList;
 import rx.Observer;
 import rx.functions.Action0;
@@ -17,15 +18,34 @@ public class MovieListRepository {
 
     private MovieListDataSource remoteDataSource;
     private MovieListDataSource localDataSource;
+    private boolean remoteCacheIsDirty = true;
+    private boolean localCacheIsDirty = true;
 
-    public MovieListRepository(@NonNull MovieListDataSource remoteDataSource,@NonNull MovieListDataSource localDataSource) {
+    private static MovieListRepository instance;
+
+    public static MovieListRepository getInstance(@NonNull MovieListDataSource remoteDataSource, @NonNull MovieListDataSource localDataSource){
+        if(instance == null){
+            instance = new MovieListRepository(remoteDataSource, localDataSource);
+        }
+
+        return instance;
+    }
+
+    public MovieListRepository(@NonNull MovieListDataSource remoteDataSource, @NonNull MovieListDataSource localDataSource) {
         this.remoteDataSource = checkNotNull(remoteDataSource);
         this.localDataSource = checkNotNull(localDataSource);
     }
 
     public void getTopMovieList(final MovielListCallback callback) {
-        remoteDataSource.getTopMovieList()
-                .asObservable()
+        if(remoteCacheIsDirty){
+            getRemoteTopMovieList(callback);
+        }else{
+            getLocalTopMovieList(callback);
+        }
+    }
+
+    private void getLocalTopMovieList(final MovielListCallback callback){
+        localDataSource.getTopMovieList().asObservable()
                 .subscribeOn(Schedulers.io())
                 .doOnSubscribe(new Action0() {
                     @Override
@@ -52,6 +72,80 @@ public class MovieListRepository {
     }
 
 
-    public void getPopularMovieList() {
+    private void getRemoteTopMovieList(final MovielListCallback callback){
+        remoteDataSource.getTopMovieList()
+                .asObservable()
+                .subscribeOn(Schedulers.io())
+                .doOnSubscribe(new Action0() {
+                    @Override
+                    public void call() {
+                        callback.onStart();
+                    }
+                })
+                .subscribe(new Observer<MovieList>() {
+                    @Override
+                    public void onCompleted() {
+                        callback.onFinish();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        callback.onError(e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(MovieList movieList) {
+                        callback.onSuccess(movieList);
+                        saveLocalTopMovieList(movieList);
+                    }
+                });
+    }
+
+    private void saveLocalTopMovieList(MovieList movieList){
+        localDataSource.save(CacheType.MOVIE_LIST_TOP, movieList).subscribe(new Observer<MovieList>() {
+            @Override
+            public void onCompleted() {
+                remoteCacheIsDirty = false;
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(MovieList movieList) {
+
+            }
+        });
+    }
+
+
+    public void getPopularMovieList(final MovielListCallback callback) {
+        remoteDataSource.getPopularMovieList()
+                .asObservable()
+                .subscribeOn(Schedulers.io())
+                .doOnSubscribe(new Action0() {
+                    @Override
+                    public void call() {
+                        callback.onStart();
+                    }
+                })
+                .subscribe(new Observer<MovieList>() {
+                    @Override
+                    public void onCompleted() {
+                        callback.onFinish();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        callback.onError(e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(MovieList movieList) {
+                        callback.onSuccess(movieList);
+                    }
+                });
     }
 }
