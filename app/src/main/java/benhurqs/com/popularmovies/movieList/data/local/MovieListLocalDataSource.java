@@ -9,6 +9,7 @@ import benhurqs.com.popularmovies.data.local.Cache;
 import benhurqs.com.popularmovies.data.local.CacheDAO;
 import benhurqs.com.popularmovies.data.local.CacheType;
 import benhurqs.com.popularmovies.movieList.data.MovieListDataSource;
+import benhurqs.com.popularmovies.movieList.data.MovielListCallback;
 import benhurqs.com.popularmovies.movieList.data.api.MovieListAPIDataSource;
 import benhurqs.com.popularmovies.movieList.domain.entities.MovieList;
 import io.realm.Realm;
@@ -52,7 +53,7 @@ public class MovieListLocalDataSource implements MovieListDataSource {
             @Override
             public void call(Subscriber<? super MovieList> subscriber) {
                 Cache cache = dao.findCacheByType(type);
-                if (cache != null) {
+                if (cache == null) {
                     subscriber.onError(new Throwable("Not found"));
                     return;
                 }
@@ -72,8 +73,9 @@ public class MovieListLocalDataSource implements MovieListDataSource {
         return Observable.create(subscribe);
     }
 
-    public Observable<MovieList> save(@CacheType.Type final int type, MovieList movieList){
-        return dao.saveCache(type, movieList);
+    @Override
+    public void save(@CacheType.Type final int type, MovieList movieList, MovielListCallback callback){
+        dao.saveCache(type, movieList, callback);
     }
 
 

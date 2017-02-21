@@ -11,5 +11,5 @@ import rx.Observable;
 public interface MovieListDataSource {
     Observable<MovieList> getTopMovieList();
     Observable<MovieList> getPopularMovieList();
-    Observable<MovieList> save(@CacheType.Type final int type, MovieList movieList);
+    void save(@CacheType.Type final int type, MovieList movieList, MovielListCallback cal);
 }

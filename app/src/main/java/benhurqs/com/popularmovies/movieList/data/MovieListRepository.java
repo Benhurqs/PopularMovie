@@ -1,10 +1,12 @@
 package benhurqs.com.popularmovies.movieList.data;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import benhurqs.com.popularmovies.data.local.CacheType;
 import benhurqs.com.popularmovies.movieList.domain.entities.MovieList;
 import rx.Observer;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
 import rx.schedulers.Schedulers;
 
@@ -18,8 +20,8 @@ public class MovieListRepository {
 
     private MovieListDataSource remoteDataSource;
     private MovieListDataSource localDataSource;
-    private boolean remoteCacheIsDirty = true;
-    private boolean localCacheIsDirty = true;
+    private boolean remoteTopCacheIsDirty = true;
+    private boolean remotePopularCacheIsDirty = true;
 
     private static MovieListRepository instance;
 
@@ -37,7 +39,7 @@ public class MovieListRepository {
     }
 
     public void getTopMovieList(final MovielListCallback callback) {
-        if(remoteCacheIsDirty){
+        if(remoteTopCacheIsDirty){
             getRemoteTopMovieList(callback);
         }else{
             getLocalTopMovieList(callback);
@@ -46,7 +48,6 @@ public class MovieListRepository {
 
     private void getLocalTopMovieList(final MovielListCallback callback){
         localDataSource.getTopMovieList().asObservable()
-                .subscribeOn(Schedulers.io())
                 .doOnSubscribe(new Action0() {
                     @Override
                     public void call() {
@@ -74,7 +75,7 @@ public class MovieListRepository {
 
     private void getRemoteTopMovieList(final MovielListCallback callback){
         remoteDataSource.getTopMovieList()
-                .asObservable()
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .doOnSubscribe(new Action0() {
                     @Override
@@ -101,20 +102,57 @@ public class MovieListRepository {
                 });
     }
 
-    private void saveLocalTopMovieList(MovieList movieList){
-        localDataSource.save(CacheType.MOVIE_LIST_TOP, movieList).subscribe(new Observer<MovieList>() {
+    private void saveLocalTopMovieList(MovieList movieList) {
+        localDataSource.save(CacheType.MOVIE_LIST_TOP, movieList, new MovielListCallback() {
             @Override
-            public void onCompleted() {
-                remoteCacheIsDirty = false;
+            public void onStart() {
+                Log.d("save top popular", " start ");
             }
 
             @Override
-            public void onError(Throwable e) {
+            public void onSuccess(MovieList list) {
+                Log.d("save top popular", " success ");
+                remoteTopCacheIsDirty = false;
 
             }
 
             @Override
-            public void onNext(MovieList movieList) {
+            public void onError(String error) {
+                Log.e("save top popular", " error - " + error);
+
+            }
+
+            @Override
+            public void onFinish() {
+                Log.d("save top popular", " finish ");
+
+            }
+        });
+    }
+
+    private void saveLocalPopularMovieList(MovieList movieList){
+        localDataSource.save(CacheType.MOVIE_LIST_POPULAR, movieList, new MovielListCallback() {
+            @Override
+            public void onStart() {
+                Log.d("save local popular", " start ");
+            }
+
+            @Override
+            public void onSuccess(MovieList list) {
+                Log.d("save local popular", " success ");
+                remotePopularCacheIsDirty = false;
+
+            }
+
+            @Override
+            public void onError(String error) {
+                Log.e("save local popular", " error - " + error);
+
+            }
+
+            @Override
+            public void onFinish() {
+                Log.d("save local popular", " finish ");
 
             }
         });
@@ -122,8 +160,43 @@ public class MovieListRepository {
 
 
     public void getPopularMovieList(final MovielListCallback callback) {
+        if(remotePopularCacheIsDirty){
+            getRemotePopularMovieList(callback);
+        }else{
+            getLocalPopularMovieList(callback);
+        }
+    }
+
+    private void getLocalPopularMovieList(final MovielListCallback callback){
+        localDataSource.getPopularMovieList().asObservable()
+                .doOnSubscribe(new Action0() {
+                    @Override
+                    public void call() {
+                        callback.onStart();
+                    }
+                })
+                .subscribe(new Observer<MovieList>() {
+                    @Override
+                    public void onCompleted() {
+                        callback.onFinish();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        callback.onError(e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(MovieList movieList) {
+                        callback.onSuccess(movieList);
+                    }
+                });
+    }
+
+
+    private void getRemotePopularMovieList(final MovielListCallback callback){
         remoteDataSource.getPopularMovieList()
-                .asObservable()
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .doOnSubscribe(new Action0() {
                     @Override
@@ -145,6 +218,7 @@ public class MovieListRepository {
                     @Override
                     public void onNext(MovieList movieList) {
                         callback.onSuccess(movieList);
+                        saveLocalPopularMovieList(movieList);
                     }
                 });
     }
