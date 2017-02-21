@@ -1,5 +1,6 @@
 package benhurqs.com.popularmovies.data.api;
 
+import benhurqs.com.popularmovies.BuildConfig;
 import benhurqs.com.popularmovies.movieList.domain.entities.MovieList;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -40,7 +41,7 @@ public class PopularMovieAPIServices {
      * @return
      */
     public Observable<MovieList> getTopMovieList(){
-        return api.getTopMovieList();
+        return api.getTopMovieList(BuildConfig.API_KEY);
     }
 
 
@@ -49,6 +50,6 @@ public class PopularMovieAPIServices {
      * @return
      */
     public Observable<MovieList> getPopularMovieList(){
-        return api.getPopularMovieList();
+        return api.getPopularMovieList(BuildConfig.API_KEY);
     }
 }

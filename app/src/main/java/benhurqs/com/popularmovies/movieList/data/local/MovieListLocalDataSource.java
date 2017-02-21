@@ -4,15 +4,12 @@ import android.support.annotation.NonNull;
 
 import com.google.gson.Gson;
 
-import benhurqs.com.popularmovies.data.api.PopularMovieAPIServices;
 import benhurqs.com.popularmovies.data.local.Cache;
 import benhurqs.com.popularmovies.data.local.CacheDAO;
 import benhurqs.com.popularmovies.data.local.CacheType;
 import benhurqs.com.popularmovies.movieList.data.MovieListDataSource;
 import benhurqs.com.popularmovies.movieList.data.MovielListCallback;
-import benhurqs.com.popularmovies.movieList.data.api.MovieListAPIDataSource;
 import benhurqs.com.popularmovies.movieList.domain.entities.MovieList;
-import io.realm.Realm;
 import rx.Observable;
 import rx.Subscriber;
 

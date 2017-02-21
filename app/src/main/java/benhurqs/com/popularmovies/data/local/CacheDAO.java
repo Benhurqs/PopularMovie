@@ -5,8 +5,6 @@ import com.google.gson.Gson;
 import benhurqs.com.popularmovies.movieList.data.MovielListCallback;
 import benhurqs.com.popularmovies.movieList.domain.entities.MovieList;
 import io.realm.Realm;
-import rx.Observable;
-import rx.Subscriber;
 
 /**
  * Created by benhur.souza on 20/02/2017.
@@ -36,48 +34,6 @@ public class CacheDAO {
      * @param movieList
      */
     public void saveCache(final int type, final MovieList movieList, final MovielListCallback callback) {
-//        Observable.OnSubscribe<MovieList> subscribe = new Observable.OnSubscribe<MovieList>() {
-//            @Override
-//            public void call(final Subscriber<? super MovieList> subscriber) {
-//                realm.executeTransactionAsync(new Realm.Transaction() {
-//                    @Override
-//                    public void execute(Realm bgRealm) {
-//                        subscriber.onStart();
-//                        //check if already exist
-//                        Cache cache = findCacheByType(bgRealm, type);
-//                        if(cache == null){
-//                            //Save new
-//                            cache = bgRealm.createObject(Cache.class);
-//                        }
-//
-//                        //Convert to json
-//                        Gson gson = new Gson();
-//                        String json = gson.toJson(movieList);
-//
-//                        //Update json
-//                        cache.json = json;
-//                        cache.type = type;
-//
-//                        subscriber.onNext(movieList);
-//                    }
-//                }, new Realm.Transaction.OnSuccess() {
-//                    @Override
-//                    public void onSuccess() {
-//                        subscriber.onCompleted();
-//                    }
-//                }, new Realm.Transaction.OnError() {
-//                    @Override
-//                    public void onError(Throwable error) {
-//                        subscriber.onError(error);
-//                    }
-//                });
-//
-//            }
-//        };
-
-//        return Observable.create(subscribe);
-
-
         realm.executeTransactionAsync(new Realm.Transaction() {
             @Override
             public void execute(Realm bgRealm) {

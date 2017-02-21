@@ -30,7 +30,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void init(){
-        repository = MovieListRepository.getInstance(MovieListAPIDataSource.getInstance(), new MovieListLocalDataSource());
+        repository = MovieListRepository.getInstance(MovieListAPIDataSource.getInstance(), MovieListLocalDataSource.getInstance());
     }
 
     public void onClickSendPopular(View view){
@@ -43,7 +43,7 @@ public class HomeActivity extends AppCompatActivity {
 
             @Override
             public void onSuccess(MovieList list) {
-                Log.d("Success popular", list.results.length + " - tamanho");
+                Log.d("Success popular", list.results[0].title + " - title");
             }
 
             @Override
@@ -69,7 +69,7 @@ public class HomeActivity extends AppCompatActivity {
 
             @Override
             public void onSuccess(MovieList list) {
-                Log.d("Success top", list.results.length + " - tamanho");
+                Log.d("Success top", list.results[0].title + " - title");
             }
 
             @Override

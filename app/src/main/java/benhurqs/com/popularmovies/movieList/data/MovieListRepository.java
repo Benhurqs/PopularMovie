@@ -15,7 +15,6 @@ import static com.google.gson.internal.$Gson$Preconditions.checkNotNull;
 /**
  * Created by Benhur on 19/02/17.
  */
-
 public class MovieListRepository {
 
     private MovieListDataSource remoteDataSource;
@@ -38,6 +37,10 @@ public class MovieListRepository {
         this.localDataSource = checkNotNull(localDataSource);
     }
 
+    /**
+     * Verify if exist local data, if yes get local data else call API
+     * @param callback
+     */
     public void getTopMovieList(final MovielListCallback callback) {
         if(remoteTopCacheIsDirty){
             getRemoteTopMovieList(callback);
@@ -158,7 +161,10 @@ public class MovieListRepository {
         });
     }
 
-
+    /**
+     * Verify if exist local data, if yes get local data else call API
+     * @param callback
+     */
     public void getPopularMovieList(final MovielListCallback callback) {
         if(remotePopularCacheIsDirty){
             getRemotePopularMovieList(callback);
