@@ -2,6 +2,8 @@ package benhurqs.com.popularmovies.commons.data.local;
 
 import com.google.gson.Gson;
 
+import benhurqs.com.popularmovies.commons.data.local.db.MovieListCache;
+import benhurqs.com.popularmovies.commons.data.local.db.MovieCache;
 import benhurqs.com.popularmovies.movie.data.managers.MovieCallback;
 import benhurqs.com.popularmovies.movieList.data.managers.MovielListCallback;
 import benhurqs.com.popularmovies.commons.domain.entities.Movie;
@@ -41,10 +43,10 @@ public class CacheDAO {
             public void execute(Realm bgRealm) {
                 callback.onStart();
                 //check if already exist
-                Cache cache = findCacheByType(bgRealm, type);
+                MovieListCache cache = findCacheByType(bgRealm, type);
                 if (cache == null) {
                     //Save new
-                    cache = bgRealm.createObject(Cache.class);
+                    cache = bgRealm.createObject(MovieListCache.class);
                 }
 
                 //Convert to json
@@ -114,7 +116,7 @@ public class CacheDAO {
 
     }
 
-    public Cache findCacheByType(@CacheType.Type int type) {
+    public MovieListCache findCacheByType(@CacheType.Type int type) {
         return findCacheByType(realm, type);
     }
 
@@ -123,7 +125,7 @@ public class CacheDAO {
     }
 
     /**
-     * Find Movie Cache object by ID
+     * Find Movie MovieListCache object by ID
      *
      * @param realm
      * @param id
@@ -137,14 +139,14 @@ public class CacheDAO {
 
 
     /**
-     * Find Cache object by Type
+     * Find MovieListCache object by Type
      *
      * @param realm
      * @param type
      * @return
      */
-    private Cache findCacheByType(Realm realm, @CacheType.Type int type) {
-        return realm.where(Cache.class)
+    private MovieListCache findCacheByType(Realm realm, @CacheType.Type int type) {
+        return realm.where(MovieListCache.class)
                 .equalTo("type", type)
                 .findFirst();
     }

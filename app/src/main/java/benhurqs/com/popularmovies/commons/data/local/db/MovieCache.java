@@ -1,4 +1,4 @@
-package benhurqs.com.popularmovies.commons.data.local;
+package benhurqs.com.popularmovies.commons.data.local.db;
 
 import io.realm.RealmObject;
 

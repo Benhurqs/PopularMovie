@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.google.gson.Gson;
 
-import benhurqs.com.popularmovies.commons.data.local.Cache;
+import benhurqs.com.popularmovies.commons.data.local.db.MovieListCache;
 import benhurqs.com.popularmovies.commons.data.local.CacheDAO;
 import benhurqs.com.popularmovies.commons.data.local.CacheType;
 import benhurqs.com.popularmovies.movieList.data.managers.MovieListDataSource;
@@ -49,7 +49,7 @@ public class MovieListLocalDataSource implements MovieListDataSource {
         Observable.OnSubscribe<MovieList> subscribe = new Observable.OnSubscribe<MovieList>() {
             @Override
             public void call(Subscriber<? super MovieList> subscriber) {
-                Cache cache = dao.findCacheByType(type);
+                MovieListCache cache = dao.findCacheByType(type);
                 if (cache == null) {
                     subscriber.onError(new Throwable("Not found"));
                     return;
