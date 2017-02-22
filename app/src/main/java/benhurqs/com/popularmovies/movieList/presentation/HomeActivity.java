@@ -6,14 +6,13 @@ import android.util.Log;
 import android.view.View;
 
 import benhurqs.com.popularmovies.R;
-import benhurqs.com.popularmovies.data.api.PopularMovieAPI;
-import benhurqs.com.popularmovies.data.api.PopularMovieAPIServices;
+import benhurqs.com.popularmovies.commons.data.api.PopularMovieAPIServices;
 import benhurqs.com.popularmovies.movieList.data.managers.MovieListRepository;
 import benhurqs.com.popularmovies.movieList.data.managers.MovielListCallback;
 import benhurqs.com.popularmovies.movieList.data.clients.api.MovieListAPIDataSource;
 import benhurqs.com.popularmovies.movieList.data.clients.local.MovieListLocalDataSource;
-import benhurqs.com.popularmovies.movieList.domain.entities.Movie;
-import benhurqs.com.popularmovies.movieList.domain.entities.MovieList;
+import benhurqs.com.popularmovies.commons.domain.entities.Movie;
+import benhurqs.com.popularmovies.commons.domain.entities.MovieList;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;

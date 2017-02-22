@@ -1,6 +1,6 @@
 package benhurqs.com.popularmovies.movieList.data.managers;
 
-import benhurqs.com.popularmovies.movieList.domain.entities.MovieList;
+import benhurqs.com.popularmovies.commons.domain.entities.MovieList;
 
 /**
  * Created by Benhur on 19/02/17.

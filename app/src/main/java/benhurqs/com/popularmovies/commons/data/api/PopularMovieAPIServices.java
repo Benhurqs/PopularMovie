@@ -1,8 +1,8 @@
-package benhurqs.com.popularmovies.data.api;
+package benhurqs.com.popularmovies.commons.data.api;
 
 import benhurqs.com.popularmovies.BuildConfig;
-import benhurqs.com.popularmovies.movieList.domain.entities.Movie;
-import benhurqs.com.popularmovies.movieList.domain.entities.MovieList;
+import benhurqs.com.popularmovies.commons.domain.entities.Movie;
+import benhurqs.com.popularmovies.commons.domain.entities.MovieList;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;

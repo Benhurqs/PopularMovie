@@ -1,4 +1,4 @@
-package benhurqs.com.popularmovies.data.local;
+package benhurqs.com.popularmovies.commons.data.local;
 
 import android.support.annotation.IntDef;
 

@@ -2,14 +2,11 @@ package benhurqs.com.popularmovies.movie.data.clients.local;
 
 import com.google.gson.Gson;
 
-import benhurqs.com.popularmovies.data.local.Cache;
-import benhurqs.com.popularmovies.data.local.CacheDAO;
-import benhurqs.com.popularmovies.data.local.MovieCache;
+import benhurqs.com.popularmovies.commons.data.local.CacheDAO;
+import benhurqs.com.popularmovies.commons.data.local.MovieCache;
 import benhurqs.com.popularmovies.movie.data.managers.MovieCallback;
 import benhurqs.com.popularmovies.movie.data.managers.MovieDataSource;
-import benhurqs.com.popularmovies.movieList.data.clients.local.MovieListLocalDataSource;
-import benhurqs.com.popularmovies.movieList.domain.entities.Movie;
-import benhurqs.com.popularmovies.movieList.domain.entities.MovieList;
+import benhurqs.com.popularmovies.commons.domain.entities.Movie;
 import rx.Observable;
 import rx.Subscriber;
 

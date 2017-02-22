@@ -3,8 +3,8 @@ package benhurqs.com.popularmovies.movieList.data.managers;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import benhurqs.com.popularmovies.data.local.CacheType;
-import benhurqs.com.popularmovies.movieList.domain.entities.MovieList;
+import benhurqs.com.popularmovies.commons.data.local.CacheType;
+import benhurqs.com.popularmovies.commons.domain.entities.MovieList;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;

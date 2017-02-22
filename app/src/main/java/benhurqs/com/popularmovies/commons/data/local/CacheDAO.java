@@ -1,11 +1,11 @@
-package benhurqs.com.popularmovies.data.local;
+package benhurqs.com.popularmovies.commons.data.local;
 
 import com.google.gson.Gson;
 
 import benhurqs.com.popularmovies.movie.data.managers.MovieCallback;
 import benhurqs.com.popularmovies.movieList.data.managers.MovielListCallback;
-import benhurqs.com.popularmovies.movieList.domain.entities.Movie;
-import benhurqs.com.popularmovies.movieList.domain.entities.MovieList;
+import benhurqs.com.popularmovies.commons.domain.entities.Movie;
+import benhurqs.com.popularmovies.commons.domain.entities.MovieList;
 import io.realm.Realm;
 
 /**
