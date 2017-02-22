@@ -12,11 +12,12 @@ import java.lang.annotation.RetentionPolicy;
 public abstract class CacheType {
 
     @Retention(RetentionPolicy.SOURCE)
-    @IntDef({MOVIE_LIST_TOP, MOVIE_LIST_POPULAR})
+    @IntDef({MOVIE_LIST_TOP, MOVIE_LIST_POPULAR, MOVIE})
 
     public @interface Type {}
     public static final int MOVIE_LIST_TOP = 0;
     public static final int MOVIE_LIST_POPULAR = 1;
+    public static final int MOVIE = 3;
 
     public abstract void setCacheType(@Type int mode);
     @Type

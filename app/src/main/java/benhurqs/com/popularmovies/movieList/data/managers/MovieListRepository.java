@@ -1,4 +1,4 @@
-package benhurqs.com.popularmovies.movieList.data;
+package benhurqs.com.popularmovies.movieList.data.managers;
 
 import android.support.annotation.NonNull;
 import android.util.Log;

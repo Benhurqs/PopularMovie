@@ -1,6 +1,7 @@
 package benhurqs.com.popularmovies.data.api;
 
 import benhurqs.com.popularmovies.BuildConfig;
+import benhurqs.com.popularmovies.movieList.domain.entities.Movie;
 import benhurqs.com.popularmovies.movieList.domain.entities.MovieList;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -30,7 +31,7 @@ public class PopularMovieAPIServices {
         retrofit = new Retrofit.Builder()
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl("http://api.themoviedb.org/3/movie/")
+                .baseUrl("http://api.themoviedb.org/3/")
                 .build();
 
         api = retrofit.create(PopularMovieAPI.class);
@@ -52,4 +53,14 @@ public class PopularMovieAPIServices {
     public Observable<MovieList> getPopularMovieList(){
         return api.getPopularMovieList(BuildConfig.API_KEY);
     }
+
+
+    /**
+     * Get movie
+     * @return
+     */
+    public Observable<Movie> getMovie(long movie_id){
+        return api.getPopularMovie(movie_id ,BuildConfig.API_KEY);
+    }
+
 }

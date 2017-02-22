@@ -1,14 +1,15 @@
-package benhurqs.com.popularmovies;
+package benhurqs.com.popularmovies.movieList.presentation;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 
-import benhurqs.com.popularmovies.movieList.data.MovieListRepository;
-import benhurqs.com.popularmovies.movieList.data.MovielListCallback;
-import benhurqs.com.popularmovies.movieList.data.api.MovieListAPIDataSource;
-import benhurqs.com.popularmovies.movieList.data.local.MovieListLocalDataSource;
+import benhurqs.com.popularmovies.R;
+import benhurqs.com.popularmovies.movieList.data.managers.MovieListRepository;
+import benhurqs.com.popularmovies.movieList.data.managers.MovielListCallback;
+import benhurqs.com.popularmovies.movieList.data.clients.api.MovieListAPIDataSource;
+import benhurqs.com.popularmovies.movieList.data.clients.local.MovieListLocalDataSource;
 import benhurqs.com.popularmovies.movieList.domain.entities.MovieList;
 
 public class HomeActivity extends AppCompatActivity {

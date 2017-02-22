@@ -1,7 +1,9 @@
 package benhurqs.com.popularmovies.data.api;
 
+import benhurqs.com.popularmovies.movieList.domain.entities.Movie;
 import benhurqs.com.popularmovies.movieList.domain.entities.MovieList;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 import rx.Observable;
 
@@ -11,9 +13,12 @@ import rx.Observable;
 
 public interface PopularMovieAPI {
 
-    @GET("top_rated?")
+    @GET("movie/top_rated?")
     Observable<MovieList> getTopMovieList(@Query("api_key") String api_key);
 
-    @GET("popular?")
+    @GET("movie/popular?")
     Observable<MovieList> getPopularMovieList(@Query("api_key") String api_key);
+
+    @GET("movie/{movie_id}?")
+    Observable<Movie> getPopularMovie(@Path("movie_id") long movie_id , @Query("api_key") String api_key);
 }

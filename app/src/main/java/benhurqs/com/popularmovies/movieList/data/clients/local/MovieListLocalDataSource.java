@@ -1,4 +1,4 @@
-package benhurqs.com.popularmovies.movieList.data.local;
+package benhurqs.com.popularmovies.movieList.data.clients.local;
 
 import android.support.annotation.NonNull;
 
@@ -7,8 +7,8 @@ import com.google.gson.Gson;
 import benhurqs.com.popularmovies.data.local.Cache;
 import benhurqs.com.popularmovies.data.local.CacheDAO;
 import benhurqs.com.popularmovies.data.local.CacheType;
-import benhurqs.com.popularmovies.movieList.data.MovieListDataSource;
-import benhurqs.com.popularmovies.movieList.data.MovielListCallback;
+import benhurqs.com.popularmovies.movieList.data.managers.MovieListDataSource;
+import benhurqs.com.popularmovies.movieList.data.managers.MovielListCallback;
 import benhurqs.com.popularmovies.movieList.domain.entities.MovieList;
 import rx.Observable;
 import rx.Subscriber;

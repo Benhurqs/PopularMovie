@@ -1,4 +1,4 @@
-package benhurqs.com.popularmovies.movieList.data;
+package benhurqs.com.popularmovies.movieList.data.managers;
 
 import benhurqs.com.popularmovies.movieList.domain.entities.MovieList;
 
