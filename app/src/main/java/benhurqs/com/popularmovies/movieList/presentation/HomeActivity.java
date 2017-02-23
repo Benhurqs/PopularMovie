@@ -30,7 +30,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void init() {
-        repository = Injection.provideTasksRepository();
+        repository = Injection.provideTasksRepository(this);
     }
 
     public void onClickSendPopular(View view) {

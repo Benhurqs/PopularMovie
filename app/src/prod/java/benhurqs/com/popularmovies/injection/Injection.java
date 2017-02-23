@@ -1,5 +1,6 @@
 package benhurqs.com.popularmovies.injection;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 
 import benhurqs.com.popularmovies.movieList.data.clients.api.MovieListAPIDataSource;
@@ -15,7 +16,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 public class Injection {
 
-    public static MovieListRepository provideTasksRepository() {
+    public static MovieListRepository provideTasksRepository(@NonNull Context context) {
+        checkNotNull(context);
         return MovieListRepository.getInstance(MovieListAPIDataSource.getInstance(), MovieListLocalDataSource.getInstance());
     }
 }

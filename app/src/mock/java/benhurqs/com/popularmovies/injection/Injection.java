@@ -1,5 +1,8 @@
 package benhurqs.com.popularmovies.injection;
 
+import android.content.Context;
+import android.support.annotation.NonNull;
+
 import benhurqs.com.popularmovies.movieList.data.managers.MovieListRepository;
 
 /**
@@ -8,7 +11,7 @@ import benhurqs.com.popularmovies.movieList.data.managers.MovieListRepository;
 
 public class Injection {
 
-    public static MovieListRepository provideTasksRepository() {
-        return MovieListRepository.getInstance();
+    public static MovieListRepository provideTasksRepository(@NonNull Context context) {
+        return MovieListRepository.getInstance(context);
     }
 }
