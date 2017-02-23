@@ -1,6 +1,9 @@
 apply plugin: 'com.android.application'
 apply plugin: 'realm-android'
 
+def props = new Properties()
+file("../private.properties").withInputStream { props.load(it) }
+
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.1"
@@ -12,15 +15,33 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "API_KEY", "\"af4510d7da9640eb8310f57fbf99ef4c\""
+            buildConfigField "String", "API_KEY", props.getProperty("api_key")
         }
 
         debug {
-            buildConfigField "String", "API_KEY", "\"af4510d7da9640eb8310f57fbf99ef4c\""
+            buildConfigField "String", "API_KEY", props.getProperty("api_key")
+        }
+    }
+
+    productFlavors {
+        mock {
+            applicationIdSuffix = ".mock"
+        }
+        prod {
+
+        }
+    }
+
+    // Remove mockRelease as it's not needed.
+    android.variantFilter { variant ->
+        if(variant.buildType.name.equals('release')
+                && variant.getFlavors().get(0).name.equals('mock')) {
+            variant.setIgnore(true);
         }
     }
 
