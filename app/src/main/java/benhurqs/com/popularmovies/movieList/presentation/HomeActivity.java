@@ -6,16 +6,10 @@ import android.util.Log;
 import android.view.View;
 
 import benhurqs.com.popularmovies.R;
-import benhurqs.com.popularmovies.commons.data.api.PopularMovieAPIServices;
+import benhurqs.com.popularmovies.commons.domain.entities.MovieList;
+import benhurqs.com.popularmovies.injection.Injection;
 import benhurqs.com.popularmovies.movieList.data.managers.MovieListRepository;
 import benhurqs.com.popularmovies.movieList.data.managers.MovielListCallback;
-import benhurqs.com.popularmovies.movieList.data.clients.api.MovieListAPIDataSource;
-import benhurqs.com.popularmovies.movieList.data.clients.local.MovieListLocalDataSource;
-import benhurqs.com.popularmovies.commons.domain.entities.Movie;
-import benhurqs.com.popularmovies.commons.domain.entities.MovieList;
-import rx.Observer;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -35,11 +29,11 @@ public class HomeActivity extends AppCompatActivity {
         init();
     }
 
-    private void init(){
-        repository = MovieListRepository.getInstance(MovieListAPIDataSource.getInstance(), MovieListLocalDataSource.getInstance());
+    private void init() {
+        repository = Injection.provideTasksRepository();
     }
 
-    public void onClickSendPopular(View view){
+    public void onClickSendPopular(View view) {
         repository.getPopularMovieList(new MovielListCallback() {
 
             @Override
@@ -65,7 +59,7 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
-    public void onClickSendTop(View view){
+    public void onClickSendTop(View view) {
         repository.getTopMovieList(new MovielListCallback() {
 
             @Override
@@ -90,25 +84,26 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        PopularMovieAPIServices.getInstance()
-                .getMovie(372058)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(new Observer<Movie>() {
-                    @Override
-                    public void onCompleted() {
-                        Log.d("Movie"," Finalizou ");
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.e("Movie","Error - " + e.getMessage());
-                    }
-
-                    @Override
-                    public void onNext(Movie movie) {
-                        Log.d("Movie",movie.title);
-                    }
-                });
+//        PopularMovieAPIServices.getInstance()
+//                .getMovie(372058)
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribeOn(Schedulers.io())
+//                .subscribe(new Observer<Movie>() {
+//                    @Override
+//                    public void onCompleted() {
+//                        Log.d("Movie"," Finalizou ");
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//                        Log.e("Movie","Error - " + e.getMessage());
+//                    }
+//
+//                    @Override
+//                    public void onNext(Movie movie) {
+//                        Log.d("Movie",movie.title);
+//                    }
+//                });
     }
+
 }

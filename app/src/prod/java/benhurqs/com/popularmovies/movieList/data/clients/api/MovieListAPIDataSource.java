@@ -2,9 +2,9 @@ package benhurqs.com.popularmovies.movieList.data.clients.api;
 
 import benhurqs.com.popularmovies.commons.data.api.PopularMovieAPIServices;
 import benhurqs.com.popularmovies.commons.data.local.CacheType;
+import benhurqs.com.popularmovies.commons.domain.entities.MovieList;
 import benhurqs.com.popularmovies.movieList.data.managers.MovieListDataSource;
 import benhurqs.com.popularmovies.movieList.data.managers.MovielListCallback;
-import benhurqs.com.popularmovies.commons.domain.entities.MovieList;
 import rx.Observable;
 
 /**

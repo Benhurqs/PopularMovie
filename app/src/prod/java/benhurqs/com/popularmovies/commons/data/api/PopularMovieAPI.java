@@ -20,5 +20,5 @@ public interface PopularMovieAPI {
     Observable<MovieList> getPopularMovieList(@Query("api_key") String api_key);
 
     @GET("movie/{movie_id}?")
-    Observable<Movie> getPopularMovie(@Path("movie_id") long movie_id , @Query("api_key") String api_key);
+    Observable<Movie> getPopularMovie(@Path("movie_id") long movie_id, @Query("api_key") String api_key);
 }
