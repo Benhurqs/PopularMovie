@@ -2,8 +2,8 @@ package benhurqs.com.popularmovies.movie.data.clients.local;
 
 import com.google.gson.Gson;
 
-import benhurqs.com.popularmovies.commons.data.local.CacheDAO;
-import benhurqs.com.popularmovies.commons.data.local.db.MovieCache;
+import benhurqs.com.popularmovies.commons.data.clients.local.CacheDAO;
+import benhurqs.com.popularmovies.commons.data.clients.local.db.MovieCache;
 import benhurqs.com.popularmovies.commons.domain.entities.Movie;
 import benhurqs.com.popularmovies.movie.data.managers.MovieCallback;
 import benhurqs.com.popularmovies.movie.data.managers.MovieDataSource;

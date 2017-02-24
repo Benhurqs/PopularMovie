@@ -1,9 +1,9 @@
-package benhurqs.com.popularmovies.commons.data.local;
+package benhurqs.com.popularmovies.commons.data.clients.local;
 
 import com.google.gson.Gson;
 
-import benhurqs.com.popularmovies.commons.data.local.db.MovieCache;
-import benhurqs.com.popularmovies.commons.data.local.db.MovieListCache;
+import benhurqs.com.popularmovies.commons.data.clients.local.db.MovieCache;
+import benhurqs.com.popularmovies.commons.data.clients.local.db.MovieListCache;
 import benhurqs.com.popularmovies.commons.domain.entities.Movie;
 import benhurqs.com.popularmovies.commons.domain.entities.MovieList;
 import benhurqs.com.popularmovies.movie.data.managers.MovieCallback;
@@ -80,39 +80,72 @@ public class CacheDAO {
      * @param movie
      */
     public void saveMovieCache( final Movie movie, final MovieCallback callback) {
-        realm.executeTransactionAsync(new Realm.Transaction() {
-            @Override
-            public void execute(Realm bgRealm) {
-                callback.onStart();
-                //check if already exist
-                MovieCache cache = findMovieById(bgRealm, CacheType.MOVIE);
-                if (cache == null) {
-                    //Save new
-                    cache = bgRealm.createObject(MovieCache.class);
-                }
+        realm.beginTransaction();
+        try {
 
-                //Convert to json
-                Gson gson = new Gson();
-                String json = gson.toJson(movie);
+            callback.onStart();
+            //check if already exist
+            MovieCache cache = findMovieById(realm, CacheType.MOVIE);
+            if (cache == null) {
+                //Save new
+                cache = realm.createObject(MovieCache.class);
+            }
 
-                //Update json
-                cache.json = json;
-                cache.id = movie.id;
-                cache.type = CacheType.MOVIE;
+            //Convert to json
+            Gson gson = new Gson();
+            String json = gson.toJson(movie);
 
+            //Update json
+            cache.json = json;
+            cache.id = movie.id;
+            cache.type = CacheType.MOVIE;
+
+            realm.commitTransaction();
+            callback.onSuccess(movie);
+            callback.onFinish();
+
+        } catch(Throwable e) {
+            if(realm.isInTransaction()) {
+                realm.cancelTransaction();
             }
-        }, new Realm.Transaction.OnSuccess() {
-            @Override
-            public void onSuccess() {
-                callback.onSuccess(movie);
-                callback.onFinish();
-            }
-        }, new Realm.Transaction.OnError() {
-            @Override
-            public void onError(Throwable error) {
-                callback.onError(error.getMessage());
-            }
-        });
+            callback.onError(e.getMessage());
+            throw e;
+        }
+
+
+//        realm.executeTransactionAsync(new Realm.Transaction() {
+//            @Override
+//            public void execute(Realm bgRealm) {
+//                callback.onStart();
+//                //check if already exist
+//                MovieCache cache = findMovieById(bgRealm, CacheType.MOVIE);
+//                if (cache == null) {
+//                    //Save new
+//                    cache = bgRealm.createObject(MovieCache.class);
+//                }
+//
+//                //Convert to json
+//                Gson gson = new Gson();
+//                String json = gson.toJson(movie);
+//
+//                //Update json
+//                cache.json = json;
+//                cache.id = movie.id;
+//                cache.type = CacheType.MOVIE;
+//
+//            }
+//        }, new Realm.Transaction.OnSuccess() {
+//            @Override
+//            public void onSuccess() {
+//                callback.onSuccess(movie);
+//                callback.onFinish();
+//            }
+//        }, new Realm.Transaction.OnError() {
+//            @Override
+//            public void onError(Throwable error) {
+//                callback.onError(error.getMessage());
+//            }
+//        });
 
     }
 

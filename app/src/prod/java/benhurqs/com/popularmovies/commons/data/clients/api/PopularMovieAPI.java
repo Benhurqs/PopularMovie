@@ -1,4 +1,4 @@
-package benhurqs.com.popularmovies.commons.data.api;
+package benhurqs.com.popularmovies.commons.data.clients.api;
 
 import benhurqs.com.popularmovies.commons.domain.entities.Movie;
 import benhurqs.com.popularmovies.commons.domain.entities.MovieList;
