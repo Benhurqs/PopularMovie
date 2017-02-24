@@ -24,7 +24,6 @@ public class MovieListRepository {
 
     public MovieListRepository(Context context) {
         this.context = context;
-        Log.d("MOCK", " MOCK ------- ");
     }
 
     /**

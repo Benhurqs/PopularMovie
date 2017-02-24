@@ -8,7 +8,7 @@ import benhurqs.com.popularmovies.commons.domain.entities.Movie;
 
 public interface MovieCallback {
     void onStart();
-    void onSuccess(Movie list);
+    void onSuccess(Movie movie);
     void onError(String error);
     void onFinish();
 }

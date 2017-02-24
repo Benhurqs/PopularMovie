@@ -23,6 +23,10 @@ public class MovieAPIDataSource implements MovieDataSource {
         return instance;
     }
 
+    public MovieAPIDataSource(){
+        api = PopularMovieAPIServices.getInstance();
+    }
+
     @Override
     public Observable<Movie> getMovie(long id) {
         return api.getMovie(id);

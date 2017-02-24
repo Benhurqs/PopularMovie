@@ -11,7 +11,12 @@ import benhurqs.com.popularmovies.movieList.data.managers.MovieListRepository;
 
 public class Injection {
 
-    public static MovieListRepository provideTasksRepository(@NonNull Context context) {
+    public static MovieListRepository provideMovieListRepository(@NonNull Context context) {
         return MovieListRepository.getInstance(context);
     }
+
+//    public static MovieRepository provideMovieRepository(@NonNull Context context) {
+//        checkNotNull(context);
+//        return MovieRepository.getInstance(MovieAPIDataSource.getInstance(), MovieLocalDataSource.getInstance());
+//    }
 }

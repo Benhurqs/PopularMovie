@@ -60,6 +60,6 @@ public class MovieLocalDataSource implements MovieDataSource {
 
     @Override
     public void save(Movie movie, MovieCallback callback) {
-
+        dao.saveMovieCache(movie, callback);
     }
 }

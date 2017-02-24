@@ -6,14 +6,18 @@ import android.util.Log;
 import android.view.View;
 
 import benhurqs.com.popularmovies.R;
+import benhurqs.com.popularmovies.commons.domain.entities.Movie;
 import benhurqs.com.popularmovies.commons.domain.entities.MovieList;
 import benhurqs.com.popularmovies.injection.Injection;
+import benhurqs.com.popularmovies.movie.data.managers.MovieCallback;
+import benhurqs.com.popularmovies.movie.data.managers.MovieRepository;
 import benhurqs.com.popularmovies.movieList.data.managers.MovieListRepository;
 import benhurqs.com.popularmovies.movieList.data.managers.MovielListCallback;
 
 public class HomeActivity extends AppCompatActivity {
 
     private MovieListRepository repository;
+    private MovieRepository movieRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +34,8 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void init() {
-        repository = Injection.provideTasksRepository(this);
+        repository = Injection.provideMovieListRepository(this);
+        movieRepository = Injection.provideMovieRepository(this);
     }
 
     public void onClickSendPopular(View view) {
@@ -84,26 +89,31 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-//        PopularMovieAPIServices.getInstance()
-//                .getMovie(372058)
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribeOn(Schedulers.io())
-//                .subscribe(new Observer<Movie>() {
-//                    @Override
-//                    public void onCompleted() {
-//                        Log.d("Movie"," Finalizou ");
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable e) {
-//                        Log.e("Movie","Error - " + e.getMessage());
-//                    }
-//
-//                    @Override
-//                    public void onNext(Movie movie) {
-//                        Log.d("Movie",movie.title);
-//                    }
-//                });
+
+    }
+
+    public void onClickMovie(View v){
+            movieRepository.findMovie(372058, new MovieCallback() {
+                @Override
+                public void onStart() {
+                    Log.d("Movie"," Start ");
+                }
+
+                @Override
+                public void onSuccess(Movie movie) {
+                    Log.d("Movie"," Success " + movie.title);
+                }
+
+                @Override
+                public void onError(String error) {
+                    Log.e("MovieError",error);
+                }
+
+                @Override
+                public void onFinish() {
+                    Log.d("Movie"," Finalizou ");
+                }
+            });
     }
 
 }

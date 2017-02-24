@@ -36,7 +36,6 @@ public class MovieListRepository {
         this.remoteDataSource = checkNotNull(remoteDataSource);
         this.localDataSource = checkNotNull(localDataSource);
 
-        Log.d("PROD", " PROD ------- ");
     }
 
     /**
