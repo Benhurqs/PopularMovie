@@ -11,30 +11,32 @@
     tools:context="benhurqs.com.popularmovies.movieList.presentation.HomeActivity">
 
     <TextView
+        android:id="@+id/txt_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:text="Hello World!" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="get movie"
-        android:onClick="onClickMovie"/>
+        android:onClick="onClickMovie"
+        android:text="get movie" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:text="send top"
-        android:onClick="onClickSendTop"/>
+        android:onClick="onClickSendTop"
+        android:text="send top" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:text="send popular"
-        android:onClick="onClickSendPopular"/>
+        android:onClick="onClickSendPopular"
+        android:text="send popular" />
 </RelativeLayout>

@@ -26,23 +26,12 @@ public class MovieListRepository {
         this.context = context;
     }
 
-    /**
-     * Verify if exist local data, if yes get local data else call API
-     * @param callback
-     */
     public void getTopMovieList(final MovielListCallback callback) {
         callback.onStart();
         callback.onSuccess(ReaderMocks.getTopMovieList(context));
         callback.onFinish();
     }
 
-
-
-
-    /**
-     * Verify if exist local data, if yes get local data else call API
-     * @param callback
-     */
     public void getPopularMovieList(final MovielListCallback callback) {
         callback.onStart();
         callback.onSuccess(ReaderMocks.getPopularMovieList(context));

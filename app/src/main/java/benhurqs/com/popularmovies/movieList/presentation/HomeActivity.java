@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import benhurqs.com.popularmovies.R;
 import benhurqs.com.popularmovies.commons.domain.entities.Movie;
@@ -18,6 +19,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private MovieListRepository repository;
     private MovieRepository movieRepository;
+    private TextView txtName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,8 @@ public class HomeActivity extends AppCompatActivity {
     private void init() {
         repository = Injection.provideMovieListRepository(this);
         movieRepository = Injection.provideMovieRepository(this);
+
+        txtName = (TextView)this.findViewById(R.id.txt_name);
     }
 
     public void onClickSendPopular(View view) {
@@ -49,6 +53,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onSuccess(MovieList list) {
                 Log.d("Success popular", list.results[0].title + " - title");
+                txtName.setText(list.results[0].title);
             }
 
             @Override
@@ -75,6 +80,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onSuccess(MovieList list) {
                 Log.d("Success top", list.results[0].id + " - title");
+                txtName.setText(list.results[0].title);
             }
 
             @Override
@@ -102,6 +108,7 @@ public class HomeActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(Movie movie) {
                     Log.d("Movie"," Success " + movie.title);
+                    txtName.setText(movie.title);
                 }
 
                 @Override
