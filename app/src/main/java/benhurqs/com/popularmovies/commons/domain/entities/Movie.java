@@ -1,5 +1,7 @@
 package benhurqs.com.popularmovies.commons.domain.entities;
 
+import java.util.Arrays;
+
 /**
  * Created by Benhur on 19/02/17.
  */
@@ -46,4 +48,23 @@ public class Movie {
     public boolean video;
     public float vote_average;
 
+    @Override
+    public String toString() {
+        return "Movie{" +
+                "poster_path='" + poster_path + '\'' +
+                ", adult=" + adult +
+                ", overview='" + overview + '\'' +
+                ", release_date='" + release_date + '\'' +
+                ", genre_ids=" + Arrays.toString(genre_ids) +
+                ", id=" + id +
+                ", original_title='" + original_title + '\'' +
+                ", original_language='" + original_language + '\'' +
+                ", title='" + title + '\'' +
+                ", backdrop_path='" + backdrop_path + '\'' +
+                ", popularity=" + popularity +
+                ", vote_count=" + vote_count +
+                ", video=" + video +
+                ", vote_average=" + vote_average +
+                '}';
+    }
 }

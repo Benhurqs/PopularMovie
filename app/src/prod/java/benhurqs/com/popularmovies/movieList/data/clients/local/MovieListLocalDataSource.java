@@ -75,5 +75,9 @@ public class MovieListLocalDataSource implements MovieListDataSource {
         dao.saveCache(type, movieList, callback);
     }
 
+    public void clearAll(){
+        dao.clearMovieListTable();
+    }
+
 
 }

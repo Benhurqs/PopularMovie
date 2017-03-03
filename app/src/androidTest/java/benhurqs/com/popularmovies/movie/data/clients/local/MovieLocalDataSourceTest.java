@@ -42,7 +42,6 @@ public class MovieLocalDataSourceTest {
         assertNotNull(mLocalDataSource);
     }
 
-
     @Test
     @UiThreadTest
     public void saveMovie_retrievesMovie() {
@@ -82,11 +81,9 @@ public class MovieLocalDataSourceTest {
 
                             @Override
                             public void onNext(Movie movie) {
-                                assertEquals(movie.title,  MOVIE_TITLE);
+                                assertEquals(newMovie.toString(),  movie.toString());
                             }
                         });
-
-
             }
         });
 

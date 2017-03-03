@@ -62,4 +62,9 @@ public class MovieLocalDataSource implements MovieDataSource {
     public void save(Movie movie, MovieCallback callback) {
         dao.saveMovieCache(movie, callback);
     }
+
+
+    public void clearAll(){
+        dao.clearMovieTable();
+    }
 }

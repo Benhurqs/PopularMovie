@@ -1,5 +1,6 @@
 package benhurqs.com.popularmovies.commons.data.clients.local;
 
+import com.google.common.cache.Cache;
 import com.google.gson.Gson;
 
 import benhurqs.com.popularmovies.commons.data.clients.local.db.MovieCache;
@@ -38,38 +39,36 @@ public class CacheDAO {
      * @param movieList
      */
     public void saveCache(final int type, final MovieList movieList, final MovielListCallback callback) {
-        realm.executeTransactionAsync(new Realm.Transaction() {
-            @Override
-            public void execute(Realm bgRealm) {
-                callback.onStart();
-                //check if already exist
-                MovieListCache cache = findCacheByType(bgRealm, type);
-                if (cache == null) {
-                    //Save new
-                    cache = bgRealm.createObject(MovieListCache.class);
-                }
+        realm.beginTransaction();
+        try {
 
-                //Convert to json
-                Gson gson = new Gson();
-                String json = gson.toJson(movieList);
+            callback.onStart();
+            //check if already exist
+            MovieListCache cache = findCacheByType(realm, type);
+            if (cache == null) {
+                //Save new
+                cache = realm.createObject(MovieListCache.class);
+            }
 
-                //Update json
-                cache.json = json;
-                cache.type = type;
+            //Convert to json
+            Gson gson = new Gson();
+            String json = gson.toJson(movieList);
 
+            //Update json
+            cache.json = json;
+            cache.type = type;
+
+            realm.commitTransaction();
+            callback.onSuccess(movieList);
+            callback.onFinish();
+
+        } catch(Throwable e) {
+            if(realm.isInTransaction()) {
+                realm.cancelTransaction();
             }
-        }, new Realm.Transaction.OnSuccess() {
-            @Override
-            public void onSuccess() {
-                callback.onSuccess(movieList);
-                callback.onFinish();
-            }
-        }, new Realm.Transaction.OnError() {
-            @Override
-            public void onError(Throwable error) {
-                callback.onError(error.getMessage());
-            }
-        });
+            callback.onError(e.getMessage());
+            throw e;
+        }
 
     }
 
@@ -112,41 +111,6 @@ public class CacheDAO {
             throw e;
         }
 
-
-//        realm.executeTransactionAsync(new Realm.Transaction() {
-//            @Override
-//            public void execute(Realm bgRealm) {
-//                callback.onStart();
-//                //check if already exist
-//                MovieCache cache = findMovieById(bgRealm, CacheType.MOVIE);
-//                if (cache == null) {
-//                    //Save new
-//                    cache = bgRealm.createObject(MovieCache.class);
-//                }
-//
-//                //Convert to json
-//                Gson gson = new Gson();
-//                String json = gson.toJson(movie);
-//
-//                //Update json
-//                cache.json = json;
-//                cache.id = movie.id;
-//                cache.type = CacheType.MOVIE;
-//
-//            }
-//        }, new Realm.Transaction.OnSuccess() {
-//            @Override
-//            public void onSuccess() {
-//                callback.onSuccess(movie);
-//                callback.onFinish();
-//            }
-//        }, new Realm.Transaction.OnError() {
-//            @Override
-//            public void onError(Throwable error) {
-//                callback.onError(error.getMessage());
-//            }
-//        });
-
     }
 
     public MovieListCache findCacheByType(@CacheType.Type int type) {
@@ -182,6 +146,18 @@ public class CacheDAO {
         return realm.where(MovieListCache.class)
                 .equalTo("type", type)
                 .findFirst();
+    }
+
+    public void clearMovieListTable(){
+        realm.beginTransaction();
+        realm.delete(MovieListCache.class);
+        realm.commitTransaction();
+    }
+
+    public void clearMovieTable(){
+        realm.beginTransaction();
+        realm.delete(MovieCache.class);
+        realm.commitTransaction();
     }
 
 

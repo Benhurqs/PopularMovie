@@ -79,7 +79,7 @@ public class HomeActivity extends AppCompatActivity {
 
             @Override
             public void onSuccess(MovieList list) {
-                Log.d("Success top", list.results[0].id + " - title");
+                Log.d("Success top", list.toString() );
                 txtName.setText(list.results[0].title);
             }
 
