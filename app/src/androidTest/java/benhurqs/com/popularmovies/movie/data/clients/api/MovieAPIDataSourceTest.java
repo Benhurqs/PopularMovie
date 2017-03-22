@@ -22,7 +22,7 @@ import static junit.framework.Assert.fail;
 
 @RunWith(AndroidJUnit4.class)
 public class MovieAPIDataSourceTest {
-    //./gradlew assembleprodDebugAndroidTest run this test
+    //gradlew connectedProdDebugAndroidTest --stacktrace run this test
 
     private MovieAPIDataSource mMovieAPIDataSource;
 

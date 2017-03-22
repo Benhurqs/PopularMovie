@@ -23,8 +23,7 @@ import static junit.framework.Assert.fail;
 @RunWith(AndroidJUnit4.class)
 @LargeTest
 public class MovieLocalDataSourceTest {
-
-    //./gradlew assembleFlavorDebugAndroidTest run this test
+    //gradlew connectedProdDebugAndroidTest --stacktrace run this test
 
     private static final String MOVIE_TITLE = "movie_title";
     private static final long MOVIE_ID = 123;

@@ -31,7 +31,7 @@ public class PopularMovieAPIServices {
         retrofit = new Retrofit.Builder()
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl("http://api.themoviedb.org/3/")
+                .baseUrl(BuildConfig.API_URL)
                 .build();
 
         api = retrofit.create(PopularMovieAPI.class);
