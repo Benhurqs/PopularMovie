@@ -1,15 +1,12 @@
 package benhurqs.com.popularmovies.movie.data.clients.api;
 
-import android.support.test.annotation.UiThreadTest;
-import android.support.test.filters.LargeTest;
 import android.support.test.runner.AndroidJUnit4;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import benhurqs.com.popularmovies.commons.domain.entities.Movie;
-import benhurqs.com.popularmovies.commons.domain.entities.MovieList;
+import benhurqs.com.popularmovies.movieList.domain.entities.Movie;
 import benhurqs.com.popularmovies.movieList.data.clients.api.MovieListAPIDataSource;
 import rx.Observer;
 

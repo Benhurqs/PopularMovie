@@ -1,4 +1,4 @@
-package benhurqs.com.popularmovies.commons.domain.entities;
+package benhurqs.com.popularmovies.movieList.domain.entities;
 
 import java.util.Arrays;
 

@@ -9,8 +9,8 @@ import java.io.InputStream;
 import java.lang.reflect.Modifier;
 
 import benhurqs.com.popularmovies.R;
-import benhurqs.com.popularmovies.commons.domain.entities.Movie;
-import benhurqs.com.popularmovies.commons.domain.entities.MovieList;
+import benhurqs.com.popularmovies.movieList.domain.entities.Movie;
+import benhurqs.com.popularmovies.movieList.domain.entities.MovieList;
 
 /**
  * Created by benhur.souza on 23/02/2017.

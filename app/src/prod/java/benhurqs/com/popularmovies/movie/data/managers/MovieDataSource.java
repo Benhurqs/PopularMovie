@@ -1,6 +1,6 @@
 package benhurqs.com.popularmovies.movie.data.managers;
 
-import benhurqs.com.popularmovies.commons.domain.entities.Movie;
+import benhurqs.com.popularmovies.movieList.domain.entities.Movie;
 import rx.Observable;
 
 /**

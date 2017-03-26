@@ -1,7 +1,7 @@
 package benhurqs.com.popularmovies.movieList.data.managers;
 
 import benhurqs.com.popularmovies.commons.data.clients.local.CacheType;
-import benhurqs.com.popularmovies.commons.domain.entities.MovieList;
+import benhurqs.com.popularmovies.movieList.domain.entities.MovieList;
 import rx.Observable;
 
 /**
