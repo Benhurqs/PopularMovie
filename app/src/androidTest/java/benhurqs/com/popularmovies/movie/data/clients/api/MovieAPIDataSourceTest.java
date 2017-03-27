@@ -6,7 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import benhurqs.com.popularmovies.movieList.domain.entities.Movie;
+import benhurqs.com.popularmovies.commons.domain.entities.Movie;
 import benhurqs.com.popularmovies.movieList.data.clients.api.MovieListAPIDataSource;
 import rx.Observer;
 

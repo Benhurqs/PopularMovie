@@ -1,8 +1,8 @@
-package benhurqs.com.popularmovies.movieList.data.managers;
+package benhurqs.com.popularmovies.movieList.domain.repositories;
 
 import android.content.Context;
-import android.util.Log;
 
+import benhurqs.com.popularmovies.movieList.data.managers.MovielListCallback;
 import benhurqs.com.popularmovies.utils.ReaderMocks;
 
 /**

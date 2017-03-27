@@ -22,6 +22,26 @@ public class MovieListType implements UseCase.RequestValues {
 
     @Order int currentOrder = TOP;
 
+    public static MovieListType setOrder(@Order int order){
+        return new MovieListType(order);
+    }
+
+    /**
+     * Set Popular order
+     * @return
+     */
+    public static MovieListType setPopularOrder(){
+        return MovieListType.setOrder(POPULAR);
+    }
+
+    /**
+     * Set Top order
+     * @return
+     */
+    public static MovieListType setTopOrder(){
+        return MovieListType.setOrder(TOP);
+    }
+
     public MovieListType(@Order int currentOrder) {
         this.currentOrder = currentOrder;
     }

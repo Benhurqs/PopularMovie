@@ -5,7 +5,8 @@ import android.support.annotation.NonNull;
 import benhurqs.com.popularmovies.commons.domain.usecases.UseCase;
 import benhurqs.com.popularmovies.commons.domain.usecases.UseCaseCallback;
 import benhurqs.com.popularmovies.movieList.data.managers.MovielListCallback;
-import benhurqs.com.popularmovies.movieList.domain.entities.MovieList;
+import benhurqs.com.popularmovies.commons.domain.entities.MovieList;
+import benhurqs.com.popularmovies.movieList.domain.entities.MovieListObj;
 import benhurqs.com.popularmovies.movieList.domain.repositories.MovieListRepository;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -14,7 +15,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * Created by benhursouza on 26/03/17.
  */
 
-public class ViewMovieListUseCase extends UseCase<MovieListType, MovieList> implements MovielListCallback{
+public class ViewMovieListUseCase extends UseCase<MovieListType, MovieListObj> implements MovielListCallback{
 
     private MovieListRepository repository;
     private UseCaseCallback useCaseCallback;
@@ -53,7 +54,7 @@ public class ViewMovieListUseCase extends UseCase<MovieListType, MovieList> impl
 
     @Override
     public void onSuccess(MovieList list) {
-        useCaseCallback.onSuccess(list);
+        useCaseCallback.onSuccess(MovieListObj.convertToObj(list));
     }
 
     @Override

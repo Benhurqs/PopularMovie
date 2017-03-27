@@ -3,8 +3,10 @@ package benhurqs.com.popularmovies.injection;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
+import benhurqs.com.popularmovies.commons.domain.usecases.UseCaseCallback;
 import benhurqs.com.popularmovies.movie.data.managers.MovieRepository;
-import benhurqs.com.popularmovies.movieList.data.managers.MovieListRepository;
+import benhurqs.com.popularmovies.movieList.domain.repositories.MovieListRepository;
+import benhurqs.com.popularmovies.movieList.domain.usecases.ViewMovieListUseCase;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -13,6 +15,15 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 
 public class Injection {
+
+    public static ViewMovieListUseCase provideMovieListUseCase(@NonNull Context context, @NonNull UseCaseCallback caseCallback) {
+        checkNotNull(context);
+        checkNotNull(caseCallback);
+
+        return ViewMovieListUseCase.getInstance(
+                Injection.provideMovieListRepository(context),
+                caseCallback);
+    }
 
     public static MovieListRepository provideMovieListRepository(@NonNull Context context) {
         return MovieListRepository.getInstance(context);

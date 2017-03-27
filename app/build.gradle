@@ -36,10 +36,12 @@ android {
             applicationIdSuffix = ".mock"
             versionCode gitVersionCodeTime
             versionName gitVersionName
+            buildConfigField "String", "BASE_IMAGE_URL", "\"http://image.tmdb.org/t/p/w185//\""
         }
         prod {
             buildConfigField "String", "API_KEY", props.getProperty("api_key") // Add HERE you API_KEY
             buildConfigField "String", "API_URL", "\"http://api.themoviedb.org/3/\""
+            buildConfigField "String", "BASE_IMAGE_URL", "\"http://image.tmdb.org/t/p/w185//\""
             versionCode gitVersionCode
             versionName gitVersionName
         }
