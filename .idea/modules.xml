@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/PopularMovie.iml" filepath="$PROJECT_DIR$/PopularMovie.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PopularMoviesUdacity.iml" filepath="$PROJECT_DIR$/PopularMoviesUdacity.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
