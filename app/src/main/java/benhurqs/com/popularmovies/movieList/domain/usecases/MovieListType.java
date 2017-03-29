@@ -22,7 +22,7 @@ public class MovieListType implements UseCase.RequestValues {
 
     @Order int currentOrder = TOP;
 
-    public static MovieListType setOrder(@Order int order){
+    public static MovieListType sortBy(@Order int order){
         return new MovieListType(order);
     }
 
@@ -31,7 +31,7 @@ public class MovieListType implements UseCase.RequestValues {
      * @return
      */
     public static MovieListType setPopularOrder(){
-        return MovieListType.setOrder(POPULAR);
+        return MovieListType.sortBy(POPULAR);
     }
 
     /**
@@ -39,7 +39,7 @@ public class MovieListType implements UseCase.RequestValues {
      * @return
      */
     public static MovieListType setTopOrder(){
-        return MovieListType.setOrder(TOP);
+        return MovieListType.sortBy(TOP);
     }
 
     public MovieListType(@Order int currentOrder) {
