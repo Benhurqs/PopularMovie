@@ -1,7 +1,7 @@
 package benhurqs.com.popularmovies.commons.data.clients.api;
 
-import benhurqs.com.popularmovies.movieList.domain.entities.Movie;
-import benhurqs.com.popularmovies.movieList.domain.entities.MovieList;
+import benhurqs.com.popularmovies.commons.domain.entities.Movie;
+import benhurqs.com.popularmovies.commons.domain.entities.MovieList;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;

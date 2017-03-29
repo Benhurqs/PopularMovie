@@ -30,7 +30,7 @@ public abstract class UseCase<RequestValue extends UseCase.RequestValues, Respon
         executeUseCase(mRequestValues);
     }
 
-    protected abstract void executeUseCase(RequestValue requestValues);
+    public abstract void executeUseCase(RequestValue requestValues);
 
     /**
      * Data passed to a request.

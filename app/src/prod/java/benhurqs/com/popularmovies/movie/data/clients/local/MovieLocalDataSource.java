@@ -4,9 +4,9 @@ import com.google.gson.Gson;
 
 import benhurqs.com.popularmovies.commons.data.clients.local.CacheDAO;
 import benhurqs.com.popularmovies.commons.data.clients.local.db.MovieCache;
+import benhurqs.com.popularmovies.commons.domain.entities.Movie;
 import benhurqs.com.popularmovies.movie.data.managers.MovieCallback;
 import benhurqs.com.popularmovies.movie.data.managers.MovieDataSource;
-import benhurqs.com.popularmovies.movieList.domain.entities.Movie;
 import rx.Observable;
 import rx.Subscriber;
 

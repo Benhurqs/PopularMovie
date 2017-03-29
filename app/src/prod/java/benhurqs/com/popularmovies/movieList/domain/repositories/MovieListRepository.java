@@ -4,9 +4,9 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 import benhurqs.com.popularmovies.commons.data.clients.local.CacheType;
+import benhurqs.com.popularmovies.commons.domain.entities.MovieList;
 import benhurqs.com.popularmovies.movieList.data.managers.MovieListDataSource;
 import benhurqs.com.popularmovies.movieList.data.managers.MovielListCallback;
-import benhurqs.com.popularmovies.movieList.domain.entities.MovieList;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
