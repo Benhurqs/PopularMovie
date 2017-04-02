@@ -13,6 +13,11 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/activity_movielist_featured_height" />
 
+        <ProgressBar
+            android:id="@+id/progressbar_movielist"
+            android:layout_width="40dp"
+            android:layout_height="40dp" />
+
 
     </RelativeLayout>
 

@@ -2,6 +2,8 @@ package benhurqs.com.popularmovies.movieList.domain.entities;
 
 import android.support.annotation.NonNull;
 
+import java.io.Serializable;
+
 import benhurqs.com.popularmovies.BuildConfig;
 import benhurqs.com.popularmovies.commons.domain.entities.Movie;
 
@@ -10,9 +12,10 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * Created by benhur.souza on 27/03/2017.
  */
-public class PlotMovieObj {
+public class PlotMovieObj implements Serializable {
     public long id;
     public String image_url;
+    public String featured_image_url;
     public String title;
 
 
@@ -30,6 +33,7 @@ public class PlotMovieObj {
         obj.id = movie.id;
         obj.title = movie.title;
         obj.image_url = BuildConfig.BASE_IMAGE_URL.concat(movie.poster_path);
+        obj.featured_image_url = BuildConfig.BASE_IMAGE_URL.concat(movie.backdrop_path);
 
         return obj;
 

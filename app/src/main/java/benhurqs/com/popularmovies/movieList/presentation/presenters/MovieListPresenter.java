@@ -24,7 +24,7 @@ public class MovieListPresenter implements MovieListContract.Presenter {
         useCase = Injection.provideMovieListUseCase(mView.getContext(), new UseCaseCallback<MovieListObj>() {
             @Override
             public void onStart() {
-
+                mView.showProgress();
             }
 
             @Override
@@ -34,12 +34,12 @@ public class MovieListPresenter implements MovieListContract.Presenter {
 
             @Override
             public void onError(String error) {
-
+                mView.showError(error);
             }
 
             @Override
             public void onFinish() {
-
+                mView.hideProgress();
             }
         });
     }

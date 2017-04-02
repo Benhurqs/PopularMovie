@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="movie"
+            type="benhurqs.com.popularmovies.movieList.domain.entities.PlotMovieObj" />
+    </data>
+
+
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -11,8 +20,8 @@
             android:id="@+id/imageview_movielist_featured"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/logan"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            app:imageUrl="@{movie.featured_image_url}"/>
 
         <View
             android:layout_width="match_parent"
@@ -29,7 +38,7 @@
             android:textColor="@android:color/white"
             android:textStyle="bold"
             android:textSize="25sp"
-            android:text="Logan"/>
+            android:text="@{movie.title}"/>
 
     </RelativeLayout>
 

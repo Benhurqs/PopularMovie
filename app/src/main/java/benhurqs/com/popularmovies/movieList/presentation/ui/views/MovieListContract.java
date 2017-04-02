@@ -12,8 +12,8 @@ import benhurqs.com.popularmovies.movieList.domain.usecases.MovieListType;
 public interface MovieListContract {
 
     interface View{
-        void showDialog();
-        void hideDialog();
+        void showProgress();
+        void hideProgress();
         void showError(String error);
         void loadMovieList(MovieListObj movies);
         Context getContext();
