@@ -42,6 +42,8 @@ public class MovieListPresenter implements MovieListContract.Presenter {
                 mView.hideProgress();
             }
         });
+
+        sort(MovieListType.POPULAR);
     }
 
     @Override

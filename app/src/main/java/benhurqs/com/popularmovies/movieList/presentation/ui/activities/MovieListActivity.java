@@ -14,6 +14,7 @@ import benhurqs.com.popularmovies.movieList.domain.usecases.MovieListType;
 import benhurqs.com.popularmovies.movieList.presentation.presenters.MovieListPresenter;
 import benhurqs.com.popularmovies.movieList.presentation.ui.adapters.FeaturedAdapter;
 import benhurqs.com.popularmovies.movieList.presentation.ui.views.MovieListContract;
+import me.relex.circleindicator.CircleIndicator;
 
 public class MovieListActivity extends AppCompatActivity implements MovieListContract.View {
 
@@ -57,6 +58,8 @@ public class MovieListActivity extends AppCompatActivity implements MovieListCon
     public void loadMovieList(MovieListObj movieListObj) {
         featuredAdapter = new FeaturedAdapter(getSupportFragmentManager(), movieListObj.movies);
         binding.contentMovielist.viewpagerMovielistFeatured.setAdapter(featuredAdapter);
+
+        binding.contentMovielist.indicatorMovelist.setViewPager(binding.contentMovielist.viewpagerMovielistFeatured);
     }
 
     private void init() {

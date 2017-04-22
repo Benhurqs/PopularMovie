@@ -13,6 +13,12 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/activity_movielist_featured_height" />
 
+        <me.relex.circleindicator.CircleIndicator
+            android:id="@+id/indicator_movelist"
+            android:layout_below="@+id/viewpager_movielist_featured"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"/>
+
         <ProgressBar
             android:id="@+id/progressbar_movielist"
             android:layout_width="40dp"
