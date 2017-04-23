@@ -44,6 +44,7 @@ public class FeaturedFragment extends Fragment {
             binding.setMovie(movieObj);
         }
 
+        setRetainInstance(true);
         return binding.getRoot();
     }
 

@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import benhurqs.com.popularmovies.movieList.domain.entities.PlotMovieObj;
 import benhurqs.com.popularmovies.movieList.presentation.ui.fragment.FeaturedFragment;
@@ -23,7 +24,8 @@ public class FeaturedAdapter extends FragmentStatePagerAdapter {
 
     public FeaturedAdapter(FragmentManager fm, ArrayList<PlotMovieObj> list) {
         super(fm);
-        this.mMovieList = list;
+        this.mMovieList = new ArrayList<>(list);
+        Collections.sort(mMovieList);
     }
 
     @Override

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:id="@+id/activity_home"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginBottom="16dp"
+        android:background="@color/colorAccent">
+
+        <TextView
+            android:id="@+id/textview_movielist_list_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/activity_horizontal_margin"
+            android:textColor="@color/blue_light"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:text="TOP MOVIE"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view_movielist_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </android.support.v7.widget.RecyclerView>
+
+
+    </LinearLayout>
+
+</layout>

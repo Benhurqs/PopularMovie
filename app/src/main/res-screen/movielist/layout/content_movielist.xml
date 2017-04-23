@@ -1,30 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <RelativeLayout
-        android:id="@+id/activity_home"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorAccent">
+        android:scrollbars="none">
 
-        <android.support.v4.view.ViewPager
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/viewpager_movielist_featured"
+        <RelativeLayout
+            android:id="@+id/activity_home"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/activity_movielist_featured_height" />
+            android:layout_height="match_parent"
+            android:background="@color/colorAccent">
 
-        <me.relex.circleindicator.CircleIndicator
-            android:id="@+id/indicator_movelist"
-            android:layout_below="@+id/viewpager_movielist_featured"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-        <ProgressBar
-            android:id="@+id/progressbar_movielist"
-            android:layout_width="40dp"
-            android:layout_height="40dp" />
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/viewpager_movielist_featured"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/activity_movielist_featured_height" />
+
+                <me.relex.circleindicator.CircleIndicator
+                    android:id="@+id/indicator_movelist"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    app:ci_drawable="@drawable/circle_yellow"
+                    app:ci_drawable_unselected="@drawable/circle_blue_light" />
+
+                <include
+                    android:id="@+id/content_list_movies"
+                    layout="@layout/content_list_movies"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
 
-    </RelativeLayout>
+            </LinearLayout>
+
+
+            <ProgressBar
+                android:id="@+id/progressbar_movielist"
+                android:layout_width="40dp"
+                android:layout_height="40dp" />
+
+
+        </RelativeLayout>
+
+    </ScrollView>
 
 </layout>

@@ -5,5 +5,8 @@
     <color name="colorPrimaryDark">#1C2330</color>
     <color name="colorAccent">#1C2330</color>
 
+    <color name="blue_light">#434954</color>
+    <color name="yellow">#F3BD13</color>
+
     <color name="gray">#787878</color>
 </resources>
