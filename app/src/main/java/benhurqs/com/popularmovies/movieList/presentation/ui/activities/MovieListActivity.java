@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 
 import benhurqs.com.popularmovies.R;
@@ -23,10 +26,16 @@ public class MovieListActivity extends AppCompatActivity implements MovieListCon
     private FeaturedAdapter featuredAdapter;
     private ActivityMovielistBinding binding;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_movielist);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar); // Attaching the layout to the toolbar object
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Top Movie");
+
 
     }
 
@@ -88,5 +97,12 @@ public class MovieListActivity extends AppCompatActivity implements MovieListCon
     @Override
     public Context getContext() {
         return this.getApplicationContext();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.movie_list_menu, menu);
+        return true;
     }
 }

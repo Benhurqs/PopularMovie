@@ -41,6 +41,18 @@ public class PlotMovieObj implements Serializable, Comparable<PlotMovieObj> {
 
     }
 
+    /**
+     * Convert scale 10 to 5
+     * @return
+     */
+    public float rating(){
+        return (vote_average/2);
+    }
+
+    public String ratingFormatted(){
+        return String.valueOf(vote_average).replace(".",",");
+    }
+
     @Override
     public int compareTo(PlotMovieObj o) {
         return o.vote_average < vote_average ? -1
