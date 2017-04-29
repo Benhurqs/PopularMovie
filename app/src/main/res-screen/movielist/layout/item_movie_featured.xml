@@ -11,6 +11,7 @@
 
 
     <RelativeLayout
+        android:id="@+id/layout_movie_list_featured"
         android:layout_width="match_parent"
         android:layout_height="@dimen/activity_movielist_featured_height"
         android:background="@color/colorPrimary"

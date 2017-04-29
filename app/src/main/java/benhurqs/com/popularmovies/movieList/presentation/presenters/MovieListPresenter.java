@@ -1,12 +1,13 @@
 package benhurqs.com.popularmovies.movieList.presentation.presenters;
 
+
 import benhurqs.com.popularmovies.R;
 import benhurqs.com.popularmovies.commons.domain.usecases.UseCaseCallback;
 import benhurqs.com.popularmovies.injection.Injection;
 import benhurqs.com.popularmovies.movieList.domain.entities.MovieListObj;
 import benhurqs.com.popularmovies.movieList.domain.usecases.MovieListType;
 import benhurqs.com.popularmovies.movieList.domain.usecases.ViewMovieListUseCase;
-import benhurqs.com.popularmovies.movieList.presentation.ui.views.MovieListContract;
+import benhurqs.com.popularmovies.movieList.presentation.ui.contract.MovieListContract;
 
 /**
  * Created by benhursouza on 28/03/17.
@@ -51,11 +52,6 @@ public class MovieListPresenter implements MovieListContract.Presenter {
     public void sort(@MovieListType.Order int order) {
         useCase.executeUseCase(MovieListType.sortBy(order));
         mView.changeTitle(getTitle(order));
-    }
-
-    @Override
-    public void clickMovie(long movieId) {
-
     }
 
     @Override

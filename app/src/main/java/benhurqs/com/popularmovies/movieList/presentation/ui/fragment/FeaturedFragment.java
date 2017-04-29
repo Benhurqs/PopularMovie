@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import benhurqs.com.popularmovies.R;
 import benhurqs.com.popularmovies.databinding.ItemMovieFeaturedBinding;
+import benhurqs.com.popularmovies.movieList.data.managers.OnClickMovieCallback;
 import benhurqs.com.popularmovies.movieList.domain.entities.PlotMovieObj;
 
 
@@ -22,6 +23,7 @@ public class FeaturedFragment extends Fragment {
     private static String MOVIE = "movie";
     private ItemMovieFeaturedBinding binding;
     private PlotMovieObj movieObj;
+    private OnClickMovieCallback listener;
 
     /**
      * Returns a new instance of this fragment for the given section
@@ -35,6 +37,10 @@ public class FeaturedFragment extends Fragment {
         return fragment;
     }
 
+    public void setCallback(OnClickMovieCallback listener){
+        this.listener = listener;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(LayoutInflater.from(container.getContext()), R.layout.item_movie_featured, container, false);
@@ -43,6 +49,15 @@ public class FeaturedFragment extends Fragment {
             movieObj = (PlotMovieObj) getArguments().getSerializable(MOVIE);
             binding.setMovie(movieObj);
         }
+
+        binding.layoutMovieListFeatured.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(listener != null){
+                    listener.onClickItem(binding.getMovie().id);
+                }
+            }
+        });
 
         setRetainInstance(true);
         return binding.getRoot();

@@ -1,6 +1,7 @@
 package benhurqs.com.popularmovies.movieList.presentation.ui.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -14,14 +15,16 @@ import android.view.View;
 
 import benhurqs.com.popularmovies.R;
 import benhurqs.com.popularmovies.databinding.ActivityMovielistBinding;
+import benhurqs.com.popularmovies.movie.presentation.ui.activities.MovieActivity;
+import benhurqs.com.popularmovies.movieList.data.managers.OnClickMovieCallback;
 import benhurqs.com.popularmovies.movieList.domain.entities.MovieListObj;
 import benhurqs.com.popularmovies.movieList.domain.usecases.MovieListType;
 import benhurqs.com.popularmovies.movieList.presentation.presenters.MovieListPresenter;
 import benhurqs.com.popularmovies.movieList.presentation.ui.adapters.FeaturedAdapter;
 import benhurqs.com.popularmovies.movieList.presentation.ui.adapters.MoviesListAdapter;
-import benhurqs.com.popularmovies.movieList.presentation.ui.views.MovieListContract;
+import benhurqs.com.popularmovies.movieList.presentation.ui.contract.MovieListContract;
 
-public class MovieListActivity extends AppCompatActivity implements MovieListContract.View {
+public class MovieListActivity extends AppCompatActivity implements MovieListContract.View, OnClickMovieCallback {
 
     private MovieListPresenter presenter;
     private FeaturedAdapter featuredAdapter;
@@ -73,10 +76,10 @@ public class MovieListActivity extends AppCompatActivity implements MovieListCon
     @Override
     public void loadMovieList(MovieListObj movieListObj) {
         binding.contentMovielist.contentListMovies.recyclerViewMovielistList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        binding.contentMovielist.contentListMovies.recyclerViewMovielistList.setAdapter(new MoviesListAdapter(movieListObj.movies));
+        binding.contentMovielist.contentListMovies.recyclerViewMovielistList.setAdapter(new MoviesListAdapter(movieListObj.movies, this));
 
 
-        featuredAdapter = new FeaturedAdapter(getSupportFragmentManager(), movieListObj.movies);
+        featuredAdapter = new FeaturedAdapter(getSupportFragmentManager(), movieListObj.movies, this);
         binding.contentMovielist.viewpagerMovielistFeatured.setAdapter(featuredAdapter);
         binding.contentMovielist.indicatorMovelist.setViewPager(binding.contentMovielist.viewpagerMovielistFeatured);
 
@@ -85,19 +88,6 @@ public class MovieListActivity extends AppCompatActivity implements MovieListCon
     private void init() {
         presenter = new MovieListPresenter(this);
         presenter.onStart();
-    }
-
-    public void onClickSendPopular(View view) {
-        presenter.sort(MovieListType.POPULAR);
-    }
-
-    public void onClickSendTop(View view) {
-        presenter.sort(MovieListType.TOP);
-    }
-
-    public void onClickMovie(View v){
-        presenter.clickMovie(372058);
-//        detailUseCase.executeUseCase(MovieRequestValue.setMovieId(372058));
     }
 
     @Override
@@ -127,5 +117,11 @@ public class MovieListActivity extends AppCompatActivity implements MovieListCon
         }
     }
 
+    @Override
+    public void onClickItem(long movieId) {
+        Intent movieActivity = new Intent(this, MovieActivity.class);
+        movieActivity.putExtra(MovieActivity.MOVIE_ID, movieId);
+        startActivity(movieActivity);
+    }
 
 }
