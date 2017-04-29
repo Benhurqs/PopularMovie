@@ -10,12 +10,12 @@
         android:scrollbars="none">
 
         <RelativeLayout
-            android:id="@+id/activity_home"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/colorAccent">
 
             <LinearLayout
+                android:id="@+id/layout_movielist"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="32dp"

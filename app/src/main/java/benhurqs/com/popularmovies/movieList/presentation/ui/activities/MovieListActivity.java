@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 
 import benhurqs.com.popularmovies.R;
@@ -34,8 +35,6 @@ public class MovieListActivity extends AppCompatActivity implements MovieListCon
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar); // Attaching the layout to the toolbar object
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Top Movie");
-
 
     }
 
@@ -46,16 +45,23 @@ public class MovieListActivity extends AppCompatActivity implements MovieListCon
         init();
     }
 
+    @Override
+    public void changeTitle(String title) {
+        getSupportActionBar().setTitle(title);
+        binding.contentMovielist.contentListMovies.textviewMovielistListTitle.setText(title);
+    }
 
     @Override
     public void showProgress() {
         binding.contentMovielist.progressbarMovielist.setVisibility(View.VISIBLE);
+        binding.contentMovielist.layoutMovielist.setVisibility(View.GONE);
 
     }
 
     @Override
     public void hideProgress() {
         binding.contentMovielist.progressbarMovielist.setVisibility(View.GONE);
+        binding.contentMovielist.layoutMovielist.setVisibility(View.VISIBLE);
 
     }
 
@@ -105,4 +111,21 @@ public class MovieListActivity extends AppCompatActivity implements MovieListCon
         inflater.inflate(R.menu.movie_list_menu, menu);
         return true;
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.action_movielist_top:
+                presenter.sort(MovieListType.TOP);
+                return true;
+            case R.id.action_movielist_popular:
+                presenter.sort(MovieListType.POPULAR);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+
 }

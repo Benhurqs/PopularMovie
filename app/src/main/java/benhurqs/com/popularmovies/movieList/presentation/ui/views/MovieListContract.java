@@ -16,6 +16,7 @@ public interface MovieListContract {
         void hideProgress();
         void showError(String error);
         void loadMovieList(MovieListObj movies);
+        void changeTitle(String title);
         Context getContext();
 
     }

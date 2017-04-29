@@ -6,9 +6,9 @@
         android:icon="@drawable/ic_theaters_black_24dp"
         android:title="filter" >
         <menu>
-            <item android:id="@+id/create_new"
+            <item android:id="@+id/action_movielist_top"
                 android:title="top" />
-            <item android:id="@+id/open"
+            <item android:id="@+id/action_movielist_popular"
                 android:title="popular" />
         </menu>
     </item>

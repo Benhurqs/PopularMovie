@@ -1,5 +1,6 @@
 package benhurqs.com.popularmovies.movieList.presentation.presenters;
 
+import benhurqs.com.popularmovies.R;
 import benhurqs.com.popularmovies.commons.domain.usecases.UseCaseCallback;
 import benhurqs.com.popularmovies.injection.Injection;
 import benhurqs.com.popularmovies.movieList.domain.entities.MovieListObj;
@@ -49,6 +50,7 @@ public class MovieListPresenter implements MovieListContract.Presenter {
     @Override
     public void sort(@MovieListType.Order int order) {
         useCase.executeUseCase(MovieListType.sortBy(order));
+        mView.changeTitle(getTitle(order));
     }
 
     @Override
@@ -59,5 +61,14 @@ public class MovieListPresenter implements MovieListContract.Presenter {
     @Override
     public void onStart() {
         init();
+    }
+
+    private String getTitle(@MovieListType.Order int order){
+        if(order == MovieListType.TOP){
+            return mView.getContext().getString(R.string.top_movie_title);
+        }
+
+        return mView.getContext().getString(R.string.popular_movie_title);
+
     }
 }
