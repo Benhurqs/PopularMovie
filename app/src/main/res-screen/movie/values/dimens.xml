@@ -1,0 +1,3 @@
+<resources>
+    <dimen name="activity_movie_image_height">350dp</dimen>
+</resources>

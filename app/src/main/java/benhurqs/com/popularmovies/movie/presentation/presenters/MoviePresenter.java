@@ -7,10 +7,6 @@ import benhurqs.com.popularmovies.movie.domain.entities.MovieDetailObj;
 import benhurqs.com.popularmovies.movie.domain.usecases.MovieRequestValue;
 import benhurqs.com.popularmovies.movie.domain.usecases.ViewMovieDetailUseCase;
 import benhurqs.com.popularmovies.movie.presentation.ui.contract.MovieContract;
-import benhurqs.com.popularmovies.movieList.domain.entities.MovieListObj;
-import benhurqs.com.popularmovies.movieList.domain.usecases.MovieListType;
-import benhurqs.com.popularmovies.movieList.domain.usecases.ViewMovieListUseCase;
-import benhurqs.com.popularmovies.movieList.presentation.ui.contract.MovieListContract;
 
 /**
  * Created by benhursouza on 29/04/17.
