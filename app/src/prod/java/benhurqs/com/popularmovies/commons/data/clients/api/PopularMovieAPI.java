@@ -1,6 +1,6 @@
 package benhurqs.com.popularmovies.commons.data.clients.api;
 
-import benhurqs.com.popularmovies.commons.domain.entities.Movie;
+import benhurqs.com.popularmovies.commons.domain.entities.MovieDetail;
 import benhurqs.com.popularmovies.commons.domain.entities.MovieList;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -20,5 +20,5 @@ public interface PopularMovieAPI {
     Observable<MovieList> getPopularMovieList(@Query("api_key") String api_key);
 
     @GET("movie/{movie_id}?")
-    Observable<Movie> getPopularMovie(@Path("movie_id") long movie_id, @Query("api_key") String api_key);
+    Observable<MovieDetail> getPopularMovie(@Path("movie_id") long movie_id, @Query("api_key") String api_key);
 }

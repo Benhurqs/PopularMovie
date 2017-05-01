@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="movie"
+            type="benhurqs.com.popularmovies.movie.domain.entities.MovieDetailObj" />
+    </data>
+
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="?attr/actionBarSize"
         android:fillViewport="true"
         android:scrollbars="none">
 
@@ -14,9 +20,19 @@
             android:layout_height="match_parent"
             android:background="@color/colorAccent">
 
+            <LinearLayout
+                android:id="@+id/layout_movie_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
+                <include layout="@layout/content_movie_header"
+                    bind:movie="@{movie}"/>
 
+                <include layout="@layout/content_movie_description"
+                    bind:movie="@{movie}"/>
 
+            </LinearLayout>
 
             <ProgressBar
                 android:id="@+id/progressbar_movie_loading"

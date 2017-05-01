@@ -25,7 +25,7 @@ public class MovieListAPIDataSource implements MovieListDataSource {
     }
 
     public MovieListAPIDataSource() {
-        api = PopularMovieAPIServices.getInstance();
+        api = PopularMovieAPIServices.get_instance();
     }
 
     @Override

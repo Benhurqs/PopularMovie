@@ -2,7 +2,7 @@ package benhurqs.com.popularmovies.movie.domain.usecases;
 
 import android.support.annotation.NonNull;
 
-import benhurqs.com.popularmovies.commons.domain.entities.Movie;
+import benhurqs.com.popularmovies.commons.domain.entities.MovieDetail;
 import benhurqs.com.popularmovies.commons.domain.usecases.UseCase;
 import benhurqs.com.popularmovies.commons.domain.usecases.UseCaseCallback;
 import benhurqs.com.popularmovies.movie.data.managers.MovieCallback;
@@ -22,11 +22,11 @@ public class ViewMovieDetailUseCase extends UseCase<MovieRequestValue, MovieDeta
     private static ViewMovieDetailUseCase instance;
 
     public static ViewMovieDetailUseCase getInstance(@NonNull MovieRepository repository, @NonNull UseCaseCallback useCaseCallback){
-        if(instance == null){
-            instance = new ViewMovieDetailUseCase(repository, useCaseCallback);
-        }
+//        if(instance == null){
+//            instance = new ViewMovieDetailUseCase(repository, useCaseCallback);
+//        }
 
-        return instance;
+        return new ViewMovieDetailUseCase(repository, useCaseCallback);
     }
 
 
@@ -49,7 +49,7 @@ public class ViewMovieDetailUseCase extends UseCase<MovieRequestValue, MovieDeta
     }
 
     @Override
-    public void onSuccess(Movie movie) {
+    public void onSuccess(MovieDetail movie) {
         useCaseCallback.onSuccess(MovieDetailObj.convertToObj(movie));
     }
 

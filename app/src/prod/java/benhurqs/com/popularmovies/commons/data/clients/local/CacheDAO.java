@@ -1,11 +1,10 @@
 package benhurqs.com.popularmovies.commons.data.clients.local;
 
-import com.google.common.cache.Cache;
 import com.google.gson.Gson;
 
 import benhurqs.com.popularmovies.commons.data.clients.local.db.MovieCache;
 import benhurqs.com.popularmovies.commons.data.clients.local.db.MovieListCache;
-import benhurqs.com.popularmovies.commons.domain.entities.Movie;
+import benhurqs.com.popularmovies.commons.domain.entities.MovieDetail;
 import benhurqs.com.popularmovies.commons.domain.entities.MovieList;
 import benhurqs.com.popularmovies.movie.data.managers.MovieCallback;
 import benhurqs.com.popularmovies.movieList.data.managers.MovielListCallback;
@@ -78,7 +77,7 @@ public class CacheDAO {
      *
      * @param movie
      */
-    public void saveMovieCache(final Movie movie, final MovieCallback callback) {
+    public void saveMovieCache(final MovieDetail movie, final MovieCallback callback) {
         realm.beginTransaction();
         try {
 

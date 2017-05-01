@@ -9,7 +9,7 @@ import java.io.InputStream;
 import java.lang.reflect.Modifier;
 
 import benhurqs.com.popularmovies.R;
-import benhurqs.com.popularmovies.commons.domain.entities.Movie;
+import benhurqs.com.popularmovies.commons.domain.entities.MovieDetail;
 import benhurqs.com.popularmovies.commons.domain.entities.MovieList;
 
 /**
@@ -26,8 +26,8 @@ public class ReaderMocks {
         return convertToObject(R.raw.popular_list, MovieList.class, context);
     }
 
-    public static Movie getMovie(Context context){
-        return convertToObject(R.raw.movie, Movie.class, context);
+    public static MovieDetail getMovie(Context context){
+        return convertToObject(R.raw.movie, MovieDetail.class, context);
     }
 
     public static <T> T convertToObject(int resourceId, Class<T> classFile, Context context){

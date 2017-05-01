@@ -39,14 +39,10 @@ public class MovieListActivity extends AppCompatActivity implements MovieListCon
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar); // Attaching the layout to the toolbar object
         setSupportActionBar(toolbar);
 
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
         init();
+
     }
+
 
     @Override
     public void changeTitle(String title) {

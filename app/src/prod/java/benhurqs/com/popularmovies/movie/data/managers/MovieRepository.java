@@ -3,7 +3,7 @@ package benhurqs.com.popularmovies.movie.data.managers;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import benhurqs.com.popularmovies.commons.domain.entities.Movie;
+import benhurqs.com.popularmovies.commons.domain.entities.MovieDetail;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
@@ -43,15 +43,15 @@ public class MovieRepository {
      * @param callback
      */
     public void findMovie(long id, final MovieCallback callback){
-        rx.Observable<Movie> local = localDataSource.getMovie(id)
-                .onErrorResumeNext(new Func1<Throwable, rx.Observable<? extends Movie>>() {
+        rx.Observable<MovieDetail> local = localDataSource.getMovie(id)
+                .onErrorResumeNext(new Func1<Throwable, rx.Observable<? extends MovieDetail>>() {
                     @Override
-                    public rx.Observable<? extends Movie> call(Throwable throwable) {
+                    public rx.Observable<? extends MovieDetail> call(Throwable throwable) {
                         return rx.Observable.empty(); //here I just want to proceed the concat despite giving an error
                     }
                 });
 
-        rx.Observable<Movie> remote = remoteDataSource.getMovie(id)
+        rx.Observable<MovieDetail> remote = remoteDataSource.getMovie(id)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io());
 
@@ -62,7 +62,7 @@ public class MovieRepository {
                         callback.onStart();
                     }
                 })
-                .subscribe(new Observer<Movie>() {
+                .subscribe(new Observer<MovieDetail>() {
                     @Override
                     public void onCompleted() {
                         callback.onFinish();
@@ -74,7 +74,7 @@ public class MovieRepository {
                     }
 
                     @Override
-                    public void onNext(Movie movie) {
+                    public void onNext(MovieDetail movie) {
                         callback.onSuccess(movie);
                         saveMovie(movie);
                     }
@@ -85,7 +85,7 @@ public class MovieRepository {
      * Save Movie object in data base local
      * @param movie
      */
-    private void saveMovie(Movie movie){
+    private void saveMovie(MovieDetail movie){
         localDataSource.save(movie, new MovieCallback() {
             @Override
             public void onStart() {
@@ -93,8 +93,8 @@ public class MovieRepository {
             }
 
             @Override
-            public void onSuccess(Movie movie) {
-                Log.d("Movie save ", " Success - " +  movie.title);
+            public void onSuccess(MovieDetail movie) {
+                Log.d("Movie save ", " Success - " +  movie.original_title);
 
             }
 

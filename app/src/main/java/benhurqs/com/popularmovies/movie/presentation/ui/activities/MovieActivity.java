@@ -10,7 +10,6 @@ import android.util.Log;
 import android.view.View;
 
 import benhurqs.com.popularmovies.R;
-import benhurqs.com.popularmovies.commons.domain.entities.Movie;
 import benhurqs.com.popularmovies.databinding.ActivityMovieBinding;
 import benhurqs.com.popularmovies.movie.domain.entities.MovieDetailObj;
 import benhurqs.com.popularmovies.movie.presentation.presenters.MoviePresenter;
@@ -58,11 +57,13 @@ public class MovieActivity extends AppCompatActivity implements MovieContract.Vi
 
     @Override
     public void showProgress() {
+        binding.contentMovie.layoutMovieContent.setVisibility(View.GONE);
         binding.contentMovie.progressbarMovieLoading.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideProgress() {
+        binding.contentMovie.layoutMovieContent.setVisibility(View.VISIBLE);
         binding.contentMovie.progressbarMovieLoading.setVisibility(View.GONE);
     }
 
@@ -73,11 +74,16 @@ public class MovieActivity extends AppCompatActivity implements MovieContract.Vi
 
     @Override
     public void loadMovie(MovieDetailObj movie) {
+        binding.contentMovie.setMovie(movie);
         Log.d("Sucesso", movie.title);
     }
 
     @Override
     public Context getContext() {
         return binding.getRoot().getContext();
+    }
+
+    public void onClickBack(View view){
+        this.finish();
     }
 }

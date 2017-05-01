@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="movie"
+            type="benhurqs.com.popularmovies.movie.domain.entities.MovieDetailObj" />
+    </data>
+
+
+
+    <RelativeLayout
+        android:id="@+id/layout_movie_detail"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/activity_movie_image_height"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical">
+
+
+        <ImageView
+            android:id="@+id/imageview_movie_banner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            app:imageUrl="@{movie.image_url}"/>
+
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_margin="16dp"
+            android:padding="8dp"
+            android:background="@drawable/circle_black"
+            android:onClick="onClickBack"
+            android:src="@drawable/ic_back"/>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/featured_degrade"/>
+
+        <TextView
+            android:id="@+id/textview_movie_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/activity_horizontal_margin"
+            android:layout_alignParentBottom="true"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:textSize="25sp"
+            android:text="@{movie.title}"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_above="@+id/textview_movie_title"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/textview_movie_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:padding="7dp"
+                android:layout_marginRight="16dp"
+                android:textSize="30sp"
+                android:textColor="@android:color/white"
+                android:text="@{movie.voteValue}"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:gravity="right"
+                android:layout_toLeftOf="@+id/textview_movie_rating"
+                android:orientation="vertical">
+
+                <RatingBar
+                    android:id="@+id/rating_bar_movie_rating"
+                    style="?android:attr/ratingBarStyleSmall"
+                    android:theme="@style/RatingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:numStars="5"
+                    android:rating="@{movie.vote_average}"
+                    android:stepSize="0.1"
+                    android:isIndicator="false" />
+
+                <TextView
+                    android:id="@+id/textview_movie_votes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:textStyle="bold"
+                    android:textSize="10sp"
+                    android:textColor="@color/gray"
+                    android:textAllCaps="true"
+                    android:text="@{movie.vote_count}"/>
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textview_movie_year"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rect_yellow"
+                android:padding="5dp"
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:textColor="@android:color/white"
+                android:text="@{movie.year}"
+                android:layout_marginLeft="16dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="16dp" />
+
+
+        </RelativeLayout>
+
+
+
+    </RelativeLayout>
+
+</layout>

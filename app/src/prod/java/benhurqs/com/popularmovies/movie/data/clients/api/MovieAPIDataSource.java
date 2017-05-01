@@ -1,8 +1,7 @@
 package benhurqs.com.popularmovies.movie.data.clients.api;
 
 import benhurqs.com.popularmovies.commons.data.clients.api.PopularMovieAPIServices;
-
-import benhurqs.com.popularmovies.commons.domain.entities.Movie;
+import benhurqs.com.popularmovies.commons.domain.entities.MovieDetail;
 import benhurqs.com.popularmovies.movie.data.managers.MovieCallback;
 import benhurqs.com.popularmovies.movie.data.managers.MovieDataSource;
 import rx.Observable;
@@ -25,16 +24,16 @@ public class MovieAPIDataSource implements MovieDataSource {
     }
 
     public MovieAPIDataSource(){
-        api = PopularMovieAPIServices.getInstance();
+        api = PopularMovieAPIServices.get_instance();
     }
 
     @Override
-    public Observable<Movie> getMovie(long id) {
+    public Observable<MovieDetail> getMovie(long id) {
         return api.getMovie(id);
     }
 
     @Override
-    public void save(Movie movie, MovieCallback callback) {
+    public void save(MovieDetail movie, MovieCallback callback) {
 
     }
 }

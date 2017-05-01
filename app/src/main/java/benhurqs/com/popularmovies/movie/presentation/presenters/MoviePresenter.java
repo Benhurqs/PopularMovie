@@ -1,6 +1,5 @@
 package benhurqs.com.popularmovies.movie.presentation.presenters;
 
-import benhurqs.com.popularmovies.commons.domain.entities.Movie;
 import benhurqs.com.popularmovies.commons.domain.usecases.UseCaseCallback;
 import benhurqs.com.popularmovies.injection.Injection;
 import benhurqs.com.popularmovies.movie.domain.entities.MovieDetailObj;
@@ -32,6 +31,7 @@ public class MoviePresenter implements MovieContract.Presenter {
             @Override
             public void onSuccess(MovieDetailObj movie) {
                 mView.loadMovie(movie);
+                mView.hideProgress();
             }
 
             @Override

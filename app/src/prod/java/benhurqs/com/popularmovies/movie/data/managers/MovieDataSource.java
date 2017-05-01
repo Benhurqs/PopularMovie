@@ -1,6 +1,6 @@
 package benhurqs.com.popularmovies.movie.data.managers;
 
-import benhurqs.com.popularmovies.commons.domain.entities.Movie;
+import benhurqs.com.popularmovies.commons.domain.entities.MovieDetail;
 import rx.Observable;
 
 /**
@@ -8,6 +8,6 @@ import rx.Observable;
  */
 
 public interface MovieDataSource {
-    Observable<Movie> getMovie(long id);
-    void save(Movie movie, MovieCallback callback);
+    Observable<MovieDetail> getMovie(long id);
+    void save(MovieDetail movie, MovieCallback callback);
 }

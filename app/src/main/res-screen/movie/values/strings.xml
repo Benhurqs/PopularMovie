@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="top_movie_title">Top Movie</string>
-    <string name="popular_movie_title">Popular Movie</string>
+    <string name="movie_storyline">Storyline</string>
 </resources>

@@ -48,6 +48,7 @@ public class Movie {
     public boolean video;
     public float vote_average;
 
+
     @Override
     public String toString() {
         return "Movie{" +
