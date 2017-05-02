@@ -1,6 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'realm-android'
-apply from: "$project.rootDir/tools/script-git-version.gradle"
+//apply from: "$project.rootDir/tools/script-git-version.gradle"
 apply from: "$project.rootDir/tools/script-findbugs.gradle"
 apply from: "$project.rootDir/tools/script-lint.gradle"
 apply from: "$project.rootDir/tools/script-pmd.gradle"
@@ -36,14 +36,14 @@ android {
     productFlavors {
         mock {
             applicationIdSuffix = ".mock"
-            versionCode gitVersionCodeTime
-            versionName gitVersionName
+            versionCode 1
+            versionName "1.0-Mock"
         }
         prod {
             buildConfigField "String", "API_KEY", props.getProperty("api_key") // Add HERE you API_KEY
             buildConfigField "String", "API_URL", "\"http://api.themoviedb.org/3/\""
-            versionCode gitVersionCode
-            versionName gitVersionName
+            versionCode 1
+            versionName "1.0"
         }
     }
 
